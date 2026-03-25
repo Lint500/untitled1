@@ -2,9 +2,9 @@
 import { createHashRouter } from 'react-router-dom'
 
 // 页面组件
-import MainView from '../modules/mainWindow/MainView.jsx'
-import AdminSystem from '../modules/adminSystem/index.jsx'
-import DevPanel from '../modules/devPanel/index.jsx'
+import MainView from '../modules/mainWindow/MainView.tsx'
+import AdminSystem from '../modules/adminSystem/index.tsx'
+import DevPanel from '../modules/devPanel/index.tsx'
 
 // 路由配置
 export const router = createHashRouter([

@@ -22,7 +22,7 @@ export const useUserStore = create((set) => ({
 }))
 
 // 应用全局状态
-export const useAppStore = create((set) => ({
+export const appStore = create((set) => ({
   theme: 'light',
   sidebarOpen: true,
   notifications: [],
@@ -36,7 +36,7 @@ export const useAppStore = create((set) => ({
 }))
 
 // Dev 面板状态
-export const useDevStore = create((set) => ({
+export const devStore = create((set) => ({
   isPanelOpen: false,
   logs: [],
   

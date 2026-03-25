@@ -5,20 +5,18 @@ import path from 'path'
 
 export default defineConfig({
   plugins: [react()],
-  root: 'src/renderer',
-  
   server: {
     port: 5173,
     host: true
   },
   
   build: {
-    outDir: '../../dist/renderer',
+    outDir: 'dist',
     assetsDir: 'assets',
     
     // 代码分割策略
     rollupOptions: {
-      input: 'index.html',
+      input: 'src/renderer/index.html',
       output: {
         manualChunks: {
           'react-vendor': ['react', 'react-dom'],
@@ -44,17 +42,17 @@ export default defineConfig({
     chunkSizeWarningLimit: 500
   },
   
-  // 路径别名 - 自己控制
+  // 路径别名 - 从 src/renderer 为基准
   resolve: {
     alias: {
-      '@modules': path.resolve(__dirname, '../src/modules'),
-      '@hooks': path.resolve(__dirname, '../src/hooks'),
-      '@services': path.resolve(__dirname, '../src/services'),
-      '@store': path.resolve(__dirname, '../src/store/index.jsx'),
-      '@components': path.resolve(__dirname, '../src/components'),
-      '@assets': path.resolve(__dirname, '../src/assets'),
-      '@router': path.resolve(__dirname, '../src/router'),
-      '@middleware': path.resolve(__dirname, '../src/middleware')
+      '@modules': path.resolve(process.cwd(), 'src/modules'),
+      '@hooks': path.resolve(process.cwd(), 'src/hooks'),
+      '@services': path.resolve(process.cwd(), 'src/services'),
+      '@store': path.resolve(process.cwd(), 'src/store/index.js'),
+      '@components': path.resolve(process.cwd(), 'src/components'),
+      '@assets': path.resolve(process.cwd(), 'src/assets'),
+      '@router': path.resolve(process.cwd(), 'src/router'),
+      '@middleware': path.resolve(process.cwd(), 'src/middleware')
     }
   },
   

@@ -3,9 +3,10 @@
   "version": "0.1.0",
   "type": "module",
   "private": true,
-  "main": "electron/main.js",
+  "main": "main.cjs",
   "scripts": {
-    "dev": "node main.js",
+    "dev": "vite",
+    "electron:dev": "concurrently \"npm run dev\" \"wait-on http://localhost:5173 && electron .\"",
     "build": "vite build && node build-electron.js",
     "preview": "vite preview"
   },
@@ -21,9 +22,11 @@
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^4.3.4",
+    "concurrently": "^8.2.2",
     "electron": "^41.0.4",
     "typescript": "^4.9.5",
     "vite": "^5.4.11",
+    "wait-on": "^7.2.0",
     "web-vitals": "^5.1.0"
   }
 }
