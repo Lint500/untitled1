@@ -1,41 +1,41 @@
-import { app, BrowserWindow, ipcMain } from 'electron';
-import path from 'path';
-import { WindowService } from './services/windowService';
-import { AuthService } from './services/authService';
-import { LogService } from './services/logService';
+import { app, BrowserWindow, ipcMain } from 'electron'
+import path from 'path'
 
-let mainWindow: BrowserWindow | null = null;
-let featurePopup: BrowserWindow | null = null;
+let mainWindow: BrowserWindow | null = null
+let featurePopup: BrowserWindow | null = null
 
 function createMainWindow() {
+  const isDev = process.env.NODE_ENV === 'development'
+  
   mainWindow = new BrowserWindow({
     width: 1200,
     height: 800,
     webPreferences: {
-      preload: path.join(__dirname, 'preload.ts'),
+      preload: path.join(__dirname, isDev ? '../../out/preload/preload.js' : 'preload.js'),
       nodeIntegration: false,
-      contextIsolation: true,
-    },
-  });
+      contextIsolation: true
+    }
+  })
 
-  const isDev = process.env.NODE_ENV === 'development';
   if (isDev) {
-    mainWindow.loadURL('http://localhost:3000');
-    mainWindow.webContents.openDevTools();
+    mainWindow.loadURL('http://localhost:5173')
+    mainWindow.webContents.openDevTools()
   } else {
-    mainWindow.loadFile(path.join(__dirname, '../build/index.html'));
+    mainWindow.loadFile(path.join(__dirname, '../dist/renderer/index.html'))
   }
 
   mainWindow.on('closed', () => {
-    mainWindow = null;
-  });
+    mainWindow = null
+  })
 }
 
 function createFeaturePopup() {
   if (featurePopup) {
-    featurePopup.focus();
-    return;
+    featurePopup.focus()
+    return
   }
+
+  const isDev = process.env.NODE_ENV === 'development'
 
   featurePopup = new BrowserWindow({
     width: 400,
@@ -46,60 +46,56 @@ function createFeaturePopup() {
     frame: true,
     resizable: false,
     webPreferences: {
-      preload: path.join(__dirname, 'preload.ts'),
+      preload: path.join(__dirname, isDev ? '../../out/preload/preload.js' : 'preload.js'),
       nodeIntegration: false,
-      contextIsolation: true,
-    },
-  });
+      contextIsolation: true
+    }
+  })
 
-  const isDev = process.env.NODE_ENV === 'development';
   if (isDev) {
-    featurePopup.loadURL('http://localhost:3000/feature-popup');
+    featurePopup.loadURL('http://localhost:5173/feature-popup')
   } else {
-    featurePopup.loadFile(path.join(__dirname, '../build/index.html'), {
-      hash: '/feature-popup',
-    });
+    featurePopup.loadFile(path.join(__dirname, '../dist/renderer/index.html'), {
+      hash: '/feature-popup'
+    })
   }
 
   featurePopup.on('closed', () => {
-    featurePopup = null;
-  });
+    featurePopup = null
+  })
 }
 
 app.whenReady().then(() => {
-  createMainWindow();
+  createMainWindow()
 
-  const authService = new AuthService();
-  const logService = new LogService();
-
-  ipcMain.handle('auth:check', () => {
-    return authService.checkPermission();
-  });
+  ipcMain.handle('auth:check', async () => {
+    return { role: 'user', isDeveloper: false }
+  })
 
   ipcMain.handle('window:createPopup', () => {
-    createFeaturePopup();
-  });
+    createFeaturePopup()
+  })
 
   ipcMain.handle('window:closePopup', () => {
     if (featurePopup) {
-      featurePopup.close();
-      featurePopup = null;
+      featurePopup.close()
+      featurePopup = null
     }
-  });
+  })
 
-  ipcMain.handle('log:send', (_, data) => {
-    logService.log(data);
-  });
+  ipcMain.handle('log:send', async (_, data) => {
+    console.log('[LOG]', data)
+  })
 
   app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) {
-      createMainWindow();
+      createMainWindow()
     }
-  });
-});
+  })
+})
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
-    app.quit();
+    app.quit()
   }
-});
+})

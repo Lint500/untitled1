@@ -1,0 +1,9 @@
+{
+  "name": "electron-react-app",
+  "version": "1.0.0",
+  "main": "electron/main.js",
+  "scripts": {
+    "dev": "vite",
+    "electron": "electron ."
+  }
+}

@@ -1,24 +1,24 @@
-import { BrowserWindow } from 'electron';
+import { BrowserWindow } from 'electron'
 
 /**
  * 窗口管理服务
  * 负责创建、管理和销毁各种窗口
  */
 export class WindowService {
-  private windows: Map<string, BrowserWindow> = new Map();
-  private mainWindow: BrowserWindow | null = null;
+  private windows: Map<string, BrowserWindow> = new Map()
+  private mainWindow: BrowserWindow | null = null
 
   /**
    * 创建主窗口
    */
   createMainWindow(config: {
-    width?: number;
-    height?: number;
-    url: string;
+    width?: number
+    height?: number
+    url: string
   }): BrowserWindow {
     if (this.mainWindow) {
-      this.mainWindow.focus();
-      return this.mainWindow;
+      this.mainWindow.focus()
+      return this.mainWindow
     }
 
     const window = new BrowserWindow({
@@ -27,45 +27,45 @@ export class WindowService {
       webPreferences: {
         preload: require.resolve('../preload'),
         nodeIntegration: false,
-        contextIsolation: true,
-      },
-    });
+        contextIsolation: true
+      }
+    })
 
-    window.loadURL(config.url);
+    window.loadURL(config.url)
     
     window.on('closed', () => {
-      this.mainWindow = null;
-      this.windows.delete('main');
-    });
+      this.mainWindow = null
+      this.windows.delete('main')
+    })
 
-    this.mainWindow = window;
-    this.windows.set('main', window);
+    this.mainWindow = window
+    this.windows.set('main', window)
 
-    return window;
+    return window
   }
 
   /**
    * 创建功能小窗口
    */
   createPopup(config: {
-    id: string;
-    width?: number;
-    height?: number;
-    url: string;
-    parent?: BrowserWindow;
-    modal?: boolean;
-    show?: boolean;
-    frame?: boolean;
-    resizable?: boolean;
+    id: string
+    width?: number
+    height?: number
+    url: string
+    parent?: BrowserWindow
+    modal?: boolean
+    show?: boolean
+    frame?: boolean
+    resizable?: boolean
   }): BrowserWindow | null {
     // 如果窗口已存在，直接聚焦
-    const existingWindow = this.windows.get(config.id);
+    const existingWindow = this.windows.get(config.id)
     if (existingWindow) {
-      existingWindow.focus();
-      return existingWindow;
+      existingWindow.focus()
+      return existingWindow
     }
 
-    const parent = config.parent || this.mainWindow || undefined;
+    const parent = config.parent || this.mainWindow || undefined
 
     const window = new BrowserWindow({
       width: config.width || 400,
@@ -78,36 +78,36 @@ export class WindowService {
       webPreferences: {
         preload: require.resolve('../preload'),
         nodeIntegration: false,
-        contextIsolation: true,
-      },
-    });
+        contextIsolation: true
+      }
+    })
 
-    window.loadURL(config.url);
+    window.loadURL(config.url)
 
     window.on('closed', () => {
-      this.windows.delete(config.id);
-    });
+      this.windows.delete(config.id)
+    })
 
-    this.windows.set(config.id, window);
+    this.windows.set(config.id, window)
 
-    return window;
+    return window
   }
 
   /**
    * 获取窗口实例
    */
   getWindow(id: string): BrowserWindow | undefined {
-    return this.windows.get(id);
+    return this.windows.get(id)
   }
 
   /**
    * 关闭窗口
    */
   closeWindow(id: string): void {
-    const window = this.windows.get(id);
+    const window = this.windows.get(id)
     if (window) {
-      window.close();
-      this.windows.delete(id);
+      window.close()
+      this.windows.delete(id)
     }
   }
 
@@ -116,20 +116,20 @@ export class WindowService {
    */
   closeAll(): void {
     this.windows.forEach((window) => {
-      window.close();
-    });
-    this.windows.clear();
-    this.mainWindow = null;
+      window.close()
+    })
+    this.windows.clear()
+    this.mainWindow = null
   }
 
   /**
    * 显示窗口
    */
   showWindow(id: string): void {
-    const window = this.windows.get(id);
+    const window = this.windows.get(id)
     if (window) {
-      window.show();
-      window.focus();
+      window.show()
+      window.focus()
     }
   }
 
@@ -137,9 +137,9 @@ export class WindowService {
    * 隐藏窗口
    */
   hideWindow(id: string): void {
-    const window = this.windows.get(id);
+    const window = this.windows.get(id)
     if (window) {
-      window.hide();
+      window.hide()
     }
   }
 
@@ -147,6 +147,6 @@ export class WindowService {
    * 获取主窗口
    */
   getMainWindow(): BrowserWindow | null {
-    return this.mainWindow;
+    return this.mainWindow
   }
 }
