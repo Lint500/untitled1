@@ -1,4 +1,3 @@
-// 真正的启动入口 - 你掌控一切！
 import { createServer } from 'vite'
 import react from '@vitejs/plugin-react'
 import { spawn } from 'child_process'
@@ -8,7 +7,7 @@ import path from 'path'
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
 async function start() {
-  console.log('\n🚀 启动应用...\n')
+  console.log('\n 启动应用...\n')
   
   // 1. 启动 Vite 开发服务器
   const server = await createServer({
@@ -37,13 +36,13 @@ async function start() {
     })
 
     electron.on('close', (code) => {
-      console.log('\n👋 Electron 已退出，代码:', code)
+      console.log('\n Electron 已退出，代码:', code)
       process.exit(code)
     })
   }, 1000)
 }
 
 start().catch(err => {
-  console.error('❌ 启动失败:', err)
+  console.error('启动失败:', err)
   process.exit(1)
 })

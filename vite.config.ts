@@ -50,7 +50,7 @@ export default defineConfig({
       '@modules': path.resolve(__dirname, '../src/modules'),
       '@hooks': path.resolve(__dirname, '../src/hooks'),
       '@services': path.resolve(__dirname, '../src/services'),
-      '@store': path.resolve(__dirname, '../src/store/index.js'),
+      '@store': path.resolve(__dirname, '../src/store/index.jsx'),
       '@components': path.resolve(__dirname, '../src/components'),
       '@assets': path.resolve(__dirname, '../src/assets'),
       '@router': path.resolve(__dirname, '../src/router'),
