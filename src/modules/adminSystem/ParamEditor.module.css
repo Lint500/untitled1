@@ -1,0 +1,95 @@
+/* ParamEditor 组件私有样式 */
+.paramEditor {
+}
+
+.addParamSection {
+  margin-bottom: 20px;
+  padding: 15px;
+  background-color: var(--bg-secondary);
+  border-radius: var(--border-radius);
+}
+
+.sectionTitle {
+  margin-top: 0;
+  margin-bottom: 15px;
+  font-size: 18px;
+  color: var(--text-primary);
+}
+
+.inputGroup {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.input {
+  flex: 1;
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid var(--border-color);
+  font-size: 14px;
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+}
+
+.addButton {
+  padding: 8px 16px;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s ease;
+}
+
+.addButton:hover {
+  background-color: #45a049;
+}
+
+.paramsList {
+  margin-top: 20px;
+}
+
+.listTitle {
+  margin-bottom: 15px;
+  font-size: 18px;
+  color: var(--text-primary);
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.tableHeader {
+  background-color: var(--bg-secondary);
+}
+
+.tableRow {
+  border-bottom: 1px solid #eee;
+}
+
+.tableCell {
+  padding: 10px;
+  text-align: left;
+}
+
+.editButton {
+  padding: 5px 10px;
+  background-color: var(--secondary-color);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  margin-right: 5px;
+  transition: background-color 0.2s ease;
+}
+
+.editButton:hover {
+  background-color: #1976D2;
+}

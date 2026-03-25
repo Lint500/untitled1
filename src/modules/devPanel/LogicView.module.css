@@ -1,0 +1,33 @@
+/* LogicView 组件私有样式 */
+.logicContainer {
+  background-color: #2d2d2d;
+  padding: 15px;
+  border-radius: 4px;
+  height: 300px;
+  overflow: auto;
+}
+
+.statusSection {
+  margin-bottom: 15px;
+}
+
+.statusLabel {
+  color: #aaa;
+  font-size: 12px;
+  margin-bottom: 5px;
+}
+
+.statusText {
+  color: #fff;
+  font-size: 14px;
+}
+
+.statusSuccess {
+  color: #4CAF50;
+}
+
+.statusTitle {
+  color: #4CAF50;
+  margin-bottom: 10px;
+  font-weight: 600;
+}

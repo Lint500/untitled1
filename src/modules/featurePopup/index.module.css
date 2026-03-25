@@ -1,0 +1,24 @@
+/* FeaturePopup 模块私有样式 */
+.container {
+  padding: 20px;
+}
+
+.backButton {
+  margin-bottom: 20px;
+  padding: 8px 16px;
+  cursor: pointer;
+  background-color: var(--secondary-color);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  transition: background-color 0.2s ease;
+}
+
+.backButton:hover {
+  background-color: #1976D2;
+}
+
+.featureContent {
+  padding: 10px;
+}

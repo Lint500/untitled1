@@ -1,0 +1,73 @@
+/* UserManage 组件私有样式 */
+.userManage {
+}
+
+.loading {
+  text-align: center;
+  color: var(--text-secondary);
+  padding: 20px;
+}
+
+.userTable {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.tableHeader {
+  background-color: var(--bg-secondary);
+}
+
+.tableRow {
+  border-bottom: 1px solid #eee;
+}
+
+.tableCell {
+  padding: 12px;
+  text-align: left;
+}
+
+.roleBadge {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.roleBadge.developer {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.roleBadge.user {
+  background-color: var(--secondary-color);
+  color: white;
+}
+
+.actionButton {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  margin-right: 5px;
+  transition: background-color 0.2s ease;
+}
+
+.editButton {
+  background-color: var(--secondary-color);
+  color: white;
+}
+
+.editButton:hover {
+  background-color: #1976D2;
+}
+
+.deleteButton {
+  background-color: var(--danger-color);
+  color: white;
+}
+
+.deleteButton:hover {
+  background-color: #d32f2f;
+}

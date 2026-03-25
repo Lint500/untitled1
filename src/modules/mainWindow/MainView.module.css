@@ -1,0 +1,43 @@
+/* MainView 模块私有样式 */
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: var(--bg-secondary);
+}
+
+.title {
+  margin-bottom: 40px;
+  color: var(--text-primary);
+  font-size: 28px;
+  font-weight: 600;
+}
+
+.subtitle {
+  margin-top: 20px;
+  color: var(--text-secondary);
+  font-size: 14px;
+}
+
+.infoCard {
+  margin-top: 30px;
+  padding: 20px;
+  background-color: var(--bg-primary);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-sm);
+}
+
+.infoItem {
+  margin-bottom: 10px;
+}
+
+.infoLabel {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.infoValue {
+  color: var(--text-secondary);
+}

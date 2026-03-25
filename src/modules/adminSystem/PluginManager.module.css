@@ -1,0 +1,101 @@
+/* PluginManager 组件私有样式 */
+.pluginManager {
+}
+
+.loading {
+  text-align: center;
+  color: var(--text-secondary);
+  padding: 20px;
+}
+
+.pluginList {
+  display: grid;
+  gap: 15px;
+}
+
+.pluginCard {
+  padding: 15px;
+  background-color: var(--bg-secondary);
+  border-radius: var(--border-radius);
+  border: 2px solid var(--border-color);
+  transition: border-color 0.2s ease;
+}
+
+.pluginCard.enabled {
+  border-color: var(--success-color);
+}
+
+.pluginHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.pluginInfo {
+  flex: 1;
+}
+
+.pluginName {
+  margin: 0 0 5px 0;
+  font-size: 18px;
+  color: var(--text-primary);
+}
+
+.pluginDescription {
+  margin: 0 0 5px 0;
+  color: var(--text-secondary);
+  font-size: 14px;
+}
+
+.pluginMeta {
+  margin: 0;
+  color: var(--text-light);
+  font-size: 12px;
+}
+
+.pluginActions {
+  display: flex;
+  gap: 10px;
+}
+
+.toggleButton {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s ease;
+}
+
+.toggleButton.enable {
+  background-color: var(--success-color);
+  color: white;
+}
+
+.toggleButton.enable:hover {
+  background-color: #45a049;
+}
+
+.toggleButton.disable {
+  background-color: var(--warning-color);
+  color: white;
+}
+
+.toggleButton.disable:hover {
+  background-color: #f57c00;
+}
+
+.uninstallButton {
+  padding: 8px 16px;
+  background-color: var(--danger-color);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s ease;
+}
+
+.uninstallButton:hover {
+  background-color: #d32f2f;
+}

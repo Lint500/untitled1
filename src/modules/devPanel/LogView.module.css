@@ -1,0 +1,64 @@
+/* LogView 组件私有样式 */
+.logContainer {
+  background-color: #2d2d2d;
+  padding: 10px;
+  border-radius: 4px;
+  height: 300px;
+  overflow: auto;
+  font-family: monospace;
+  font-size: 12px;
+}
+
+.emptyLogs {
+  color: #888;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.logEntry {
+  margin-bottom: 5px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid #333;
+}
+
+.logTimestamp {
+  color: #888;
+  margin-right: 5px;
+}
+
+.logLevel {
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-size: 10px;
+  color: white;
+  margin-right: 5px;
+}
+
+.logLevel.info {
+  background-color: #2196F3;
+}
+
+.logLevel.warn {
+  background-color: #ff9800;
+}
+
+.logLevel.error {
+  background-color: #f44336;
+}
+
+.logLevel.debug {
+  background-color: #9C27B0;
+}
+
+.logMessage {
+  color: #fff;
+}
+
+.logData {
+  background-color: #1a1a1a;
+  padding: 5px;
+  margin-left: 10px;
+  color: #aaa;
+  font-family: monospace;
+  font-size: 11px;
+}

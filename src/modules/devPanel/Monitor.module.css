@@ -1,0 +1,55 @@
+/* Monitor 组件私有样式 */
+.monitorContainer {
+  background-color: #2d2d2d;
+  padding: 15px;
+  border-radius: 4px;
+  height: 300px;
+  overflow: auto;
+}
+
+.metricSection {
+  margin-bottom: 20px;
+}
+
+.metricLabel {
+  color: #aaa;
+  font-size: 12px;
+  margin-bottom: 5px;
+}
+
+.progressBar {
+  width: 100%;
+  height: 20px;
+  background-color: #1a1a1a;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  transition: width 0.3s ease;
+}
+
+.progressFill.low {
+  background-color: #4CAF50;
+}
+
+.progressFill.medium {
+  background-color: #ff9800;
+}
+
+.progressFill.high {
+  background-color: #f44336;
+}
+
+.metricValue {
+  color: #fff;
+  margin-top: 5px;
+  font-size: 14px;
+}
+
+.fpsValue {
+  color: #4CAF50;
+  font-size: 24px;
+  font-weight: 600;
+}

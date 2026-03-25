@@ -1,0 +1,41 @@
+/* Avatar 组件私有样式 */
+.avatar {
+  width: var(--avatar-size, 100px);
+  height: var(--avatar-size, 100px);
+  border-radius: 50%;
+  background-color: var(--primary-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  margin: 0 auto;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.avatar:hover {
+  transform: scale(1.05);
+  box-shadow: var(--shadow-md);
+}
+
+.avatar:active {
+  transform: scale(0.95);
+}
+
+.avatarIcon {
+  color: white;
+  font-size: calc(var(--avatar-size, 100px) / 2);
+  user-select: none;
+}
+
+/* 不同尺寸的 Avatar */
+.avatar.small {
+  --avatar-size: 60px;
+}
+
+.avatar.medium {
+  --avatar-size: 100px;
+}
+
+.avatar.large {
+  --avatar-size: 140px;
+}
