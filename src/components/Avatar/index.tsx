@@ -1,5 +1,6 @@
 import React from 'react';
 import { useIpc } from '@hooks/useIpc';
+import logo192 from '@/assets/images/logo192.png';
 import styles from './Avatar.module.css';
 
 interface AvatarProps {
@@ -28,7 +29,7 @@ const Avatar: React.FC<AvatarProps> = ({ onClick, size = 'medium' }) => {
       onClick={handleClick}
       style={getSizeValue()}
     >
-      <span className={styles.avatarIcon}>👤</span>
+      <img src={logo192} alt="Avatar" className={styles.avatarIcon} />
     </div>
   );
 };
