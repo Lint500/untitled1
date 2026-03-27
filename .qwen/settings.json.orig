@@ -8,6 +8,5 @@
       "Bash(rm *)",
       "Bash(mv *)"
     ]
-  },
-  "$version": 3
+  }
 }
