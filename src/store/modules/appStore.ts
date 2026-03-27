@@ -17,3 +17,6 @@ export const appStore = create<AppState>((set) => ({
   setTheme: (theme) => set({ theme }),
   setUserRole: (role) => set({ userRole: role }),
 }));
+
+// 为了兼容旧代码
+export const useUserStore = appStore;

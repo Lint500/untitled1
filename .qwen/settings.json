@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm run *)",
+      "Bash(sleep *)",
+      "Bash(curl *)",
+      "Bash(pkill *)",
+      "Bash(rm *)",
+      "Bash(mv *)"
+    ]
+  }
+}

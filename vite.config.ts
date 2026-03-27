@@ -9,6 +9,9 @@ export default defineConfig({
     port: 5173,
     host: true
   },
+
+  // 指定开发服务器的入口 HTML 文件
+  appType: 'spa',
   
   build: {
     outDir: 'dist',
@@ -45,16 +48,18 @@ export default defineConfig({
   // 路径别名 - 从 src/renderer 为基准
   resolve: {
     alias: {
+      '@': path.resolve(process.cwd(), 'src'),
       '@modules': path.resolve(process.cwd(), 'src/modules'),
       '@hooks': path.resolve(process.cwd(), 'src/hooks'),
       '@services': path.resolve(process.cwd(), 'src/services'),
-      '@store': path.resolve(process.cwd(), 'src/store/index.js'),
+      '@store': path.resolve(process.cwd(), 'src/store'),
       '@components': path.resolve(process.cwd(), 'src/components'),
       '@assets': path.resolve(process.cwd(), 'src/assets'),
       '@router': path.resolve(process.cwd(), 'src/router'),
       '@middleware': path.resolve(process.cwd(), 'src/middleware')
     }
   },
+
   
   // CSS 配置
   css: {
@@ -64,5 +69,5 @@ export default defineConfig({
     }
   },
   
-  base: './'
+  base: '/'
 })
