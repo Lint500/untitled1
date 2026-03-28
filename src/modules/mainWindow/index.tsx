@@ -1,8 +1,8 @@
 import React from 'react';
-import MainView from './MainView';
+import CognitiveConsole from './CognitiveConsole';
 
 const MainWindow: React.FC = () => {
-  return <MainView />;
+  return <CognitiveConsole />;
 };
 
 export default MainWindow;
