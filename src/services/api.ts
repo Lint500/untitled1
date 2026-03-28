@@ -5,6 +5,12 @@ export const API_URLS = {
   AI_VOICE: '/ai/voice',
   AI_STREAM: '/ai/stream',
 
+  // 认知系统相关
+  SYSTEM_STATUS: '/system/status',
+  EVENT_STREAM: '/system/events',
+  MEMORIES: '/system/memories',
+  COGNITIVE_STATE: '/system/cognitive',
+
   // 插件相关
   PLUGINS: '/plugins',
   PLUGIN_INSTALL: '/plugins/install',

@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import MainWindow from '@modules/mainWindow';
 import DeveloperPanel from '@modules/devPanel';
-import AdminSystem from '@modules/adminSystem';
 import { useAuth } from '@hooks/useAuth';
 import { devStore } from '@store';
 

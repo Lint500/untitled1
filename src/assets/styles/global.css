@@ -1,26 +1,27 @@
-/* 全局样式变量 */
+/* 全局样式变量 - 深色控制台主题 */
 :root {
-  --primary-color: #4CAF50;
-  --secondary-color: #2196F3;
-  --danger-color: #f44336;
-  --warning-color: #ff9800;
-  --success-color: #4CAF50;
-  --info-color: #2196F3;
+  --primary-color: #007acc;
+  --secondary-color: #569cd6;
+  --danger-color: #f48771;
+  --warning-color: #dcdcaa;
+  --success-color: #4ec9b0;
+  --info-color: #569cd6;
 
-  --text-primary: #333;
-  --text-secondary: #666;
-  --text-light: #999;
+  --text-primary: #cccccc;
+  --text-secondary: #999999;
+  --text-light: #666666;
 
-  --bg-primary: #fff;
-  --bg-secondary: #f5f5f5;
+  --bg-primary: #1e1e1e;
+  --bg-secondary: #252526;
   --bg-dark: #1e1e1e;
+  --bg-tertiary: #333333;
 
-  --border-color: #ddd;
-  --border-radius: 8px;
+  --border-color: #404040;
+  --border-radius: 4px;
 
-  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
-  --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.15);
-  --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.2);
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.5);
 }
 
 /* 全局重置 */

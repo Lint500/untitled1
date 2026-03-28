@@ -128,7 +128,7 @@ export class LogService {
     const { BrowserWindow } = require('electron');
     const windows = BrowserWindow.getAllWindows();
     
-    windows.forEach((window) => {
+    windows.forEach((window: any) => {
       window.webContents.send('log:update', entry);
     });
   }
