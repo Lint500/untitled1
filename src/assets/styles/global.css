@@ -1,6 +1,7 @@
 /* 全局样式变量 - 深色控制台主题 */
 :root {
   --primary-color: #007acc;
+  --primary-color-dark: #005a9e;
   --secondary-color: #569cd6;
   --danger-color: #f48771;
   --warning-color: #dcdcaa;
@@ -22,6 +23,10 @@
   --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.3);
   --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.4);
   --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.5);
+
+  --emotion-positive: #4ec9b0;
+  --emotion-negative: #f48771;
+  --emotion-neutral: #999999;
 }
 
 /* 全局重置 */

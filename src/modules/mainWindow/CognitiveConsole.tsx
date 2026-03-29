@@ -5,7 +5,6 @@ import CognitiveStatePanel from './CognitiveStatePanel';
 import MemoryPanel from './MemoryPanel';
 import InteractionArea from './InteractionArea';
 import TopStatusBar from './TopStatusBar';
-import InterruptControl from './InterruptControl';
 import { useCognitive } from '@/hooks/useCognitive';
 
 const CognitiveConsole: React.FC = () => {
@@ -22,7 +21,6 @@ const CognitiveConsole: React.FC = () => {
   } = useCognitive();
 
   const [inputValue, setInputValue] = useState('');
-  const [isInterrupted, setIsInterrupted] = useState(false);
 
   if (isLoading) {
     return (
@@ -39,24 +37,11 @@ const CognitiveConsole: React.FC = () => {
     setInputValue('');
   };
 
-  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter' && !e.shiftKey) {
-      e.preventDefault();
-      handleSendMessage();
-    }
-  };
-
-  const handleInterrupt = async () => {
-    setIsInterrupted(true);
-    await sendMessage('[SYSTEM_INTERRUPT] 用户强制中断当前任务');
-    setTimeout(() => setIsInterrupted(false), 2000);
-  };
-
   return (
     <div className={styles.consoleContainer}>
       <TopStatusBar
         systemStatus={systemStatus}
-        isInterrupted={isInterrupted}
+        isInterrupted={false}
       />
 
       <div className={styles.mainContent}>
@@ -73,7 +58,6 @@ const CognitiveConsole: React.FC = () => {
           inputValue={inputValue}
           onInputChange={setInputValue}
           onSendMessage={handleSendMessage}
-          onKeyPress={handleKeyPress}
           cognitiveState={cognitiveState}
         />
 
@@ -83,11 +67,6 @@ const CognitiveConsole: React.FC = () => {
           onUpdateAttention={updateAttentionLevel}
         />
       </div>
-
-      <InterruptControl
-        onInterrupt={handleInterrupt}
-        disabled={isInterrupted}
-      />
     </div>
   );
 };

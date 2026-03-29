@@ -97,6 +97,8 @@
 ├── .gitignore                       # Git 忽略文件
 ├── build-electron.js                # Electron 构建脚本
 ├── config-overrides.js              # Webpack 配置覆盖（CRA 遗留）
+├── docs/                            # 项目文档目录
+│   └── BUG-REPORTS.md               # Bug 修复报告
 ├── index.html                       # 根 HTML（已废弃，使用 renderer/index.html）
 ├── main.cjs                         # Electron 主入口（CommonJS）
 ├── package.json                     # 项目依赖与脚本
@@ -156,6 +158,12 @@ npm run build
 
 ## 更新日志
 
+### v0.1.1 (2026-03-29)
+
+- ✅ 修复 Vite 环境下 `process is not defined` 白屏问题
+- ✅ 添加 `define` 配置处理 Node.js 全局变量
+- ✅ 创建文档文件夹和 Bug 报告机制
+
 ### v0.1.0 (2026-03-27)
 
 - ✅ 完成认知系统基础架构
@@ -182,4 +190,4 @@ npm run build
 
 本文档由开发团队维护，每次架构更新需同步修改此文档。
 
-**最后更新**: 2026-03-27
+**最后更新**: 2026-03-29

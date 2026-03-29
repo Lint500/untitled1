@@ -69,5 +69,12 @@ export default defineConfig({
     }
   },
   
+  // 定义全局变量，避免 process is not defined 错误
+  define: {
+    'process.env': {},
+    'process.platform': null,
+    'process.version': null,
+  },
+  
   base: '/'
 })

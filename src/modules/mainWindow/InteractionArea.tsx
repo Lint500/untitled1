@@ -8,7 +8,7 @@ interface InteractionAreaProps {
   inputValue: string;
   onInputChange: (value: string) => void;
   onSendMessage: () => void;
-  onKeyPress: (e: React.KeyboardEvent<HTMLInputElement>) => void;
+  onKeyPress?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
   cognitiveState: CognitiveState | null;
 }
 
@@ -100,6 +100,12 @@ const InteractionArea: React.FC<InteractionAreaProps> = ({
             value={inputValue}
             onChange={(e) => onInputChange(e.target.value)}
             onKeyPress={onKeyPress}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                onSendMessage();
+              }
+            }}
           />
           <button
             className={styles.sendButton}

@@ -8,6 +8,15 @@
   font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
 }
 
+.consoleContainer {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+}
+
 .loadingContainer {
   display: flex;
   flex-direction: column;
@@ -91,6 +100,7 @@
   display: flex;
   flex: 1;
   overflow: hidden;
+  height: calc(100vh - 36px);
 }
 
 /* ========== 左侧边栏 ========== */
@@ -100,6 +110,8 @@
   flex-direction: column;
   border-right: 1px solid var(--border-color);
   background-color: var(--bg-primary);
+  flex-shrink: 0;
+  height: 100%;
 }
 
 .eventStream {
@@ -207,6 +219,7 @@
   padding: 16px;
   overflow: hidden;
   background-color: var(--bg-secondary);
+  min-width: 0;
 }
 
 .chatContainer {
@@ -217,6 +230,8 @@
   border-radius: 4px;
   box-shadow: var(--shadow-sm);
   border: 1px solid var(--border-color);
+  flex: 1;
+  min-height: 0;
 }
 
 .chatMessages {
@@ -226,6 +241,7 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
+  min-height: 0;
 }
 
 /* 用户消息 */
@@ -319,7 +335,6 @@
   display: flex;
   padding: 12px;
   border-top: 1px solid var(--border-color);
-  gap: 8px;
 }
 
 .messageInput {
@@ -354,6 +369,36 @@
   background-color: var(--primary-color-dark);
 }
 
+/* ========== 中断控制栏 ========== */
+.interruptControl {
+  display: flex;
+  justify-content: center;
+  padding: 8px;
+  background-color: var(--bg-primary);
+  border-top: 1px solid var(--border-color);
+}
+
+.interruptButton {
+  padding: 6px 16px;
+  background-color: var(--danger-color);
+  color: white;
+  border: none;
+  border-radius: 3px;
+  font-size: 11px;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-weight: 500;
+}
+
+.interruptButton:hover:not(:disabled) {
+  background-color: #ff6b6b;
+}
+
+.interruptButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
 /* ========== 右侧认知状态面板 ========== */
 .cognitivePanel {
   width: 300px;
@@ -364,6 +409,8 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
+  flex-shrink: 0;
+  height: 100%;
 }
 
 .cognitiveSection {
