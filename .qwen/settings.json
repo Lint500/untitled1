@@ -6,8 +6,15 @@
       "Bash(curl *)",
       "Bash(pkill *)",
       "Bash(rm *)",
-      "Bash(mv *)"
+      "Bash(mv *)",
+      "Bash(d:\\ai_backend\\.venv\\scripts\\pip.exe *)",
+      "Bash(findstr *)",
+      "Read(D:\\ai_backend\\api/**)",
+      "Bash(d:\\ai_backend\\.venv\\scripts\\python.exe *)",
+      "Bash(netstat *)",
+      "Bash(npx *)",
+      "Bash(tasklist)"
     ]
   },
-  "$version": 3
+  "$version": 4
 }

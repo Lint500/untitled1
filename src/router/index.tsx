@@ -1,10 +1,10 @@
 import { createHashRouter } from 'react-router-dom'
-import CognitiveConsole from '../modules/mainWindow/CognitiveConsole'
+import MainView from '../modules/mainWindow/MainView'
 
 export const router = createHashRouter([
   {
     path: '/',
-    element: <CognitiveConsole />
+    element: <MainView />
   },
   {
     path: '/login',

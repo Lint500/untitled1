@@ -1,80 +1,50 @@
-// 自己控制打包配置 - 完全透明
-import { defineConfig } from 'vite'
+import { defineConfig, loadEnv } from 'vite'
 import react from '@vitejs/plugin-react'
 import path from 'path'
 
-export default defineConfig({
-  plugins: [react()],
-  server: {
-    port: 5173,
-    host: true
-  },
+export default defineConfig(({ mode }) => {
+  const env = loadEnv(mode, process.cwd(), '')
+  const backend = env.VITE_BACKEND_ORIGIN || 'http://localhost:8000'
+  const wsBackend = backend.replace(/^http/, 'ws')
 
-  // 指定开发服务器的入口 HTML 文件
-  appType: 'spa',
-  
-  build: {
-    outDir: 'dist',
-    assetsDir: 'assets',
-    
-    // 代码分割策略
-    rollupOptions: {
-      input: 'src/renderer/index.html',
-      output: {
-        manualChunks: {
-          'react-vendor': ['react', 'react-dom'],
-          'router-vendor': ['react-router-dom'],
-          'state-vendor': ['zustand']
-        }
-      }
+  return {
+    plugins: [react()],
+    resolve: {
+      alias: {
+        '@': path.resolve(__dirname, './src'),
+        '@components': path.resolve(__dirname, './src/components'),
+        '@modules': path.resolve(__dirname, './src/modules'),
+        '@hooks': path.resolve(__dirname, './src/hooks'),
+        '@store': path.resolve(__dirname, './src/store'),
+        '@services': path.resolve(__dirname, './src/services'),
+      },
     },
-    
-    // 压缩选项
-    minify: 'terser',
-    terserOptions: {
-      compress: {
-        drop_console: true,  // 生产环境移除 console
-        drop_debugger: true
-      }
+    base: './',
+    server: {
+      port: 5173,
+      // 同源代理：浏览器请求 /api/** → 转发到后端 8000，避免 CORS + 鉴权头丢失
+      proxy: {
+        '/api': {
+          target: backend,
+          changeOrigin: true,
+          rewrite: (p) => p.replace(/^\/api/, ''),
+        },
+        '/ws': {
+          target: wsBackend,
+          ws: true,
+          changeOrigin: true,
+          rewrite: (p) => p.replace(/^\/ws/, ''),
+        },
+        '/sse': {
+          target: backend,
+          changeOrigin: true,
+          rewrite: (p) => p.replace(/^\/sse/, ''),
+        },
+      },
     },
-    
-    // Source map
-    sourcemap: false,
-    
-    // 资源大小限制
-    chunkSizeWarningLimit: 500
-  },
-  
-  // 路径别名 - 从 src/renderer 为基准
-  resolve: {
-    alias: {
-      '@': path.resolve(process.cwd(), 'src'),
-      '@modules': path.resolve(process.cwd(), 'src/modules'),
-      '@hooks': path.resolve(process.cwd(), 'src/hooks'),
-      '@services': path.resolve(process.cwd(), 'src/services'),
-      '@store': path.resolve(process.cwd(), 'src/store'),
-      '@components': path.resolve(process.cwd(), 'src/components'),
-      '@assets': path.resolve(process.cwd(), 'src/assets'),
-      '@router': path.resolve(process.cwd(), 'src/router'),
-      '@middleware': path.resolve(process.cwd(), 'src/middleware')
-    }
-  },
-
-  
-  // CSS 配置
-  css: {
-    modules: {
-      localsConvention: 'camelCase',
-      generateScopedName: '[name]__[local]___[hash:base64:5]'
-    }
-  },
-  
-  // 定义全局变量，避免 process is not defined 错误
-  define: {
-    'process.env': {},
-    'process.platform': null,
-    'process.version': null,
-  },
-  
-  base: '/'
+    build: {
+      outDir: 'build',
+      sourcemap: true,
+    },
+  }
 })

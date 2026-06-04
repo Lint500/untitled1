@@ -1,0 +1,64 @@
+// API 接口地址常量
+export const API_URLS = {
+  // AI 相关
+  AI_CHAT: '/ai/chat',
+  AI_VOICE: '/ai/voice',
+  AI_STREAM: '/ai/stream',
+
+  // 认知系统相关
+  SYSTEM_STATUS: '/system/status',
+  EVENT_STREAM: '/system/events',
+  MEMORIES: '/system/memories',
+  COGNITIVE_STATE: '/system/cognitive',
+
+  // 插件相关
+  PLUGINS: '/plugins',
+  PLUGIN_INSTALL: '/plugins/install',
+  PLUGIN_UNINSTALL: '/plugins/uninstall',
+  PLUGIN_ENABLE: '/plugins/enable',
+  PLUGIN_DISABLE: '/plugins/disable',
+
+  // 系统参数
+  SYSTEM_PARAMS: '/system/params',
+  SYSTEM_LOGS: '/system/logs',
+
+  // 用户管理
+  USERS: '/users',
+  USER_ROLE: '/users/role',
+
+  // 认证
+  AUTH_LOGIN: '/auth/login',
+  AUTH_LOGOUT: '/auth/logout',
+
+  // Humanoid AGI - 信息处理
+  SPEECH_RECOGNIZE: '/speech/recognize',
+  IMAGE_ANALYZE: '/image/analyze',
+  IMAGE_DETECT_UI: '/image/detect-ui',
+
+  // Humanoid AGI - 工具管理
+  TOOLS_LIST: '/tools/',
+  TOOLS_CALL: '/tools/call',
+  TOOLS_STATUS: '/tools/status',
+
+  // Humanoid AGI - 记忆管理
+  MEMORY_SHORT_TERM: '/memory/short-term',
+  MEMORY_LONG_TERM: '/memory/long-term',
+  MEMORY_PERSONALITY: '/memory/personality',
+
+  // Humanoid AGI - 流式思考
+  STREAM_SESSION: '/stream/session',
+  STREAM_SSE: '/stream/sse',
+
+  // Humanoid AGI - 注意力
+  ATTENTION_CALCULATE: '/attention/weight/calculate',
+  ATTENTION_ANALYZE: '/attention/analyze',
+
+  // Humanoid AGI - 管理控制台
+  MANAGEMENT_DASHBOARD: '/management/dashboard',
+  MANAGEMENT_SYSTEM: '/management/system',
+  MANAGEMENT_MODULES: '/management/modules',
+  MANAGEMENT_MEMORY: '/management/memory',
+  MANAGEMENT_METRICS: '/management/metrics',
+};
+
+export default API_URLS;

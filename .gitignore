@@ -21,3 +21,19 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# environment
+.env
+
+# IDE
+.idea/
+
+# build artifacts
+dist/
+.omc/
+.releases/
+.spec-workflow/
+untitled1/
+qt-app/build/
+qt-app/dist/
+qt-app/ReactDesktopApp.spec

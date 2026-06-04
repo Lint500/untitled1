@@ -7,7 +7,11 @@
   "scripts": {
     "dev": "vite",
     "electron:dev": "concurrently \"npm run dev\" \"wait-on http://localhost:5173 && electron .\"",
-    "build": "vite build && node build-electron.js",
+    "qt:dev": "python qt-app/main.py",
+    "build": "vite build",
+    "build:electron": "node build-electron.js",
+    "build:qt": "python qt-app/build.py",
+    "build:all": "npm run build && npm run build:electron && npm run build:qt",
     "preview": "vite preview"
   },
   "dependencies": {

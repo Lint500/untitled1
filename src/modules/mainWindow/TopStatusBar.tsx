@@ -1,13 +1,15 @@
 import React from 'react';
 import styles from './MainView.module.css';
-import type { SystemStatus } from '@/services/cognitiveApi';
+import type { SystemStatus } from '../../services/cognitiveApi';
+import { devStore } from '../../store';
 
 interface TopStatusBarProps {
   systemStatus: SystemStatus | null;
   isInterrupted: boolean;
+  onOpenMonitor: () => void;
 }
 
-const TopStatusBar: React.FC<TopStatusBarProps> = ({ systemStatus, isInterrupted }) => {
+const TopStatusBar: React.FC<TopStatusBarProps> = ({ systemStatus, isInterrupted, onOpenMonitor }) => {
   const getStatusClass = (state: string) => {
     switch (state) {
       case 'THINKING':
@@ -23,6 +25,10 @@ const TopStatusBar: React.FC<TopStatusBarProps> = ({ systemStatus, isInterrupted
     if (value > 0) return styles.emotionPositive;
     if (value < 0) return styles.emotionNegative;
     return '';
+  };
+
+  const handleOpenSettings = () => {
+    devStore.getState().setIsPanelOpen(true);
   };
 
   return (
@@ -63,6 +69,26 @@ const TopStatusBar: React.FC<TopStatusBarProps> = ({ systemStatus, isInterrupted
         <span className={styles.statusLabel}>LLM 状态:</span>
         <span className={styles.statusValue}>{systemStatus?.llmStatus || '-'}</span>
       </div>
+
+      <div className={styles.statusSeparator}>|</div>
+
+      <button
+        className={styles.monitorButton}
+        onClick={onOpenMonitor}
+        title="打开系统监控面板"
+      >
+        📊 监控
+      </button>
+
+      <div className={styles.statusSeparator}>|</div>
+
+      <button
+        className={styles.settingsButton}
+        onClick={handleOpenSettings}
+        title="打开设置面板"
+      >
+        ⚙️ 设置
+      </button>
 
       <div className={styles.statusSpacer} />
 
