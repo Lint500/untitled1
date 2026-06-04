@@ -1,23 +1,23 @@
-/* 全局样式变量 - 深色控制台主题 */
+/* 全局样式变量 - GitHub 深色主题 */
 :root {
-  --primary-color: #007acc;
-  --secondary-color: #569cd6;
-  --danger-color: #f48771;
-  --warning-color: #dcdcaa;
-  --success-color: #4ec9b0;
-  --info-color: #569cd6;
+  --primary-color: #58a6ff;
+  --secondary-color: #79c0ff;
+  --danger-color: #f85149;
+  --warning-color: #d29922;
+  --success-color: #3fb950;
+  --info-color: #58a6ff;
 
-  --text-primary: #cccccc;
-  --text-secondary: #999999;
-  --text-light: #666666;
+  --text-primary: #e6edf3;
+  --text-secondary: #7c8db5;
+  --text-light: #4d5d7a;
 
-  --bg-primary: #1e1e1e;
-  --bg-secondary: #252526;
-  --bg-dark: #1e1e1e;
-  --bg-tertiary: #333333;
+  --bg-primary: #0d1117;
+  --bg-secondary: #161b22;
+  --bg-dark: #0d1117;
+  --bg-tertiary: #21262d;
 
-  --border-color: #404040;
-  --border-radius: 4px;
+  --border-color: #30363d;
+  --border-radius: 6px;
 
   --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.3);
   --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.4);

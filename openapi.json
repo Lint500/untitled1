@@ -1,0 +1,2640 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Humanoid AGI",
+    "description": "类人智能架构系统 API",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/info-process/speech/recognize": {
+      "post": {
+        "tags": [
+          "信息处理"
+        ],
+        "summary": "Recognize Speech",
+        "description": "语音识别接口\n\n接收音频文件进行语音识别，可选择是否对识别结果进行文本分析。\n\n参数:\n    audio_file: 上传的音频文件\n    analyze_text: 是否对识别文本进行分析，默认为 False\n\n返回:\n    包含识别结果和可选文本分析结果的字典",
+        "operationId": "recognize_speech_info_process_speech_recognize_post",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_recognize_speech_info_process_speech_recognize_post"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/info-process/text/analyze": {
+      "post": {
+        "tags": [
+          "信息处理"
+        ],
+        "summary": "Analyze Text",
+        "description": "文字分析接口",
+        "operationId": "analyze_text_info_process_text_analyze_post",
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_analyze_text_info_process_text_analyze_post"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/info-process/image/analyze": {
+      "post": {
+        "tags": [
+          "信息处理"
+        ],
+        "summary": "Analyze Image",
+        "description": "图像分析接口\n\n接收图像文件进行分析，可选择是否对生成的描述文本进行文本分析。\n\n参数:\n    image_file: 上传的图像文件\n    analyze_description: 是否对图像描述进行文本分析，默认为 False\n\n返回:\n    包含图像分析结果和可选文本分析结果的字典",
+        "operationId": "analyze_image_info_process_image_analyze_post",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_analyze_image_info_process_image_analyze_post"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/info-process/status": {
+      "get": {
+        "tags": [
+          "信息处理"
+        ],
+        "summary": "Get Status",
+        "description": "获取信息处理模块状态",
+        "operationId": "get_status_info_process_status_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/memory/short-term/dialog": {
+      "post": {
+        "tags": [
+          "记忆"
+        ],
+        "summary": "Add Dialog",
+        "description": "添加对话到短期记忆\n\n参数:\n    role: 角色 (user, assistant, system)\n    text: 对话内容\n    metadata: 元数据\n\n返回:\n    添加的对话记录",
+        "operationId": "add_dialog_memory_short_term_dialog_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "additionalProperties": true,
+                "type": "object",
+                "title": "Request"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/memory/short-term/context": {
+      "get": {
+        "tags": [
+          "记忆"
+        ],
+        "summary": "Get Context",
+        "description": "获取对话上下文\n\n参数:\n    limit: 返回轮次限制\n\n返回:\n    对话上下文列表",
+        "operationId": "get_context_memory_short_term_context_get",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 20,
+              "title": "Limit"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/memory/short-term/working": {
+      "post": {
+        "tags": [
+          "记忆"
+        ],
+        "summary": "Set Working Memory",
+        "operationId": "set_working_memory_memory_short_term_working_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "additionalProperties": true,
+                "type": "object",
+                "title": "Request"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/memory/short-term/working/{key}": {
+      "get": {
+        "tags": [
+          "记忆"
+        ],
+        "summary": "Get Working Memory",
+        "description": "获取工作记忆\n\n参数:\n    key: 键\n\n返回:\n    工作记忆值",
+        "operationId": "get_working_memory_memory_short_term_working__key__get",
+        "parameters": [
+          {
+            "name": "key",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Key"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/memory/short-term/emotion": {
+      "get": {
+        "tags": [
+          "记忆"
+        ],
+        "summary": "Get Current Emotion",
+        "description": "获取当前情绪",
+        "operationId": "get_current_emotion_memory_short_term_emotion_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "记忆"
+        ],
+        "summary": "Set Current Emotion",
+        "description": "设置当前情绪\n\n参数:\n    emotion: 情绪数据\n\n返回:\n    操作结果",
+        "operationId": "set_current_emotion_memory_short_term_emotion_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "additionalProperties": true,
+                "type": "object",
+                "title": "Emotion"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/memory/short-term/clear": {
+      "delete": {
+        "tags": [
+          "记忆"
+        ],
+        "summary": "Clear Short Term",
+        "description": "清空短期记忆",
+        "operationId": "clear_short_term_memory_short_term_clear_delete",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/memory/long-term": {
+      "post": {
+        "tags": [
+          "记忆"
+        ],
+        "summary": "Save Long Term",
+        "description": "保存长期记忆\n\n参数:\n    memory_type: 记忆类型 (dialog, thought, preference, summary, evolution, event)\n    content: 记忆内容\n\n返回:\n    保存的记忆记录",
+        "operationId": "save_long_term_memory_long_term_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_save_long_term_memory_long_term_post"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/memory/long-term/{memory_type}": {
+      "get": {
+        "tags": [
+          "记忆"
+        ],
+        "summary": "Load Long Term",
+        "description": "加载长期记忆\n\n参数:\n    memory_type: 记忆类型\n    limit: 返回数量限制\n\n返回:\n    记忆列表",
+        "operationId": "load_long_term_memory_long_term__memory_type__get",
+        "parameters": [
+          {
+            "name": "memory_type",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Memory Type"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 50,
+              "title": "Limit"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/memory/long-term/{memory_type}/search": {
+      "get": {
+        "tags": [
+          "记忆"
+        ],
+        "summary": "Search Long Term",
+        "description": "搜索长期记忆\n\n参数:\n    memory_type: 记忆类型\n    keywords: 关键词（逗号分隔）\n    limit: 返回数量限制\n\n返回:\n    匹配的记忆列表",
+        "operationId": "search_long_term_memory_long_term__memory_type__search_get",
+        "parameters": [
+          {
+            "name": "memory_type",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Memory Type"
+            }
+          },
+          {
+            "name": "keywords",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Keywords"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 20,
+              "title": "Limit"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/memory/long-term/{memory_id}": {
+      "delete": {
+        "tags": [
+          "记忆"
+        ],
+        "summary": "Delete Long Term",
+        "description": "删除长期记忆\n\n参数:\n    memory_id: 记忆 ID\n    memory_type: 记忆类型（可选）\n\n返回:\n    删除的记录数",
+        "operationId": "delete_long_term_memory_long_term__memory_id__delete",
+        "parameters": [
+          {
+            "name": "memory_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Memory Id"
+            }
+          },
+          {
+            "name": "memory_type",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "title": "Memory Type"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/memory/personality": {
+      "get": {
+        "tags": [
+          "记忆"
+        ],
+        "summary": "Get Personality",
+        "description": "获取完整人格配置",
+        "operationId": "get_personality_memory_personality_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/memory/personality/trait/{key}": {
+      "get": {
+        "tags": [
+          "记忆"
+        ],
+        "summary": "Get Personality Trait",
+        "description": "获取人格特征\n\n参数:\n    key: 特征键名\n    default: 默认值\n\n返回:\n    特征值",
+        "operationId": "get_personality_trait_memory_personality_trait__key__get",
+        "parameters": [
+          {
+            "name": "key",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Key"
+            }
+          },
+          {
+            "name": "default",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "title": "Default"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "记忆"
+        ],
+        "summary": "Update Personality Trait",
+        "operationId": "update_personality_trait_memory_personality_trait__key__put",
+        "parameters": [
+          {
+            "name": "key",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Key"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": true,
+                "title": "Request"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/memory/personality/values": {
+      "get": {
+        "tags": [
+          "记忆"
+        ],
+        "summary": "Get Values",
+        "description": "获取价值观倾向",
+        "operationId": "get_values_memory_personality_values_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/memory/blackbox/{log_type}": {
+      "get": {
+        "tags": [
+          "记忆"
+        ],
+        "summary": "Get Blackbox Logs",
+        "description": "获取黑匣子日志\n\n参数:\n    log_type: 日志类型 (thinking, module_call, emotion, evolution, error)\n    limit: 返回数量限制\n\n返回:\n    日志列表",
+        "operationId": "get_blackbox_logs_memory_blackbox__log_type__get",
+        "parameters": [
+          {
+            "name": "log_type",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Log Type"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 50,
+              "title": "Limit"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/memory/blackbox/timeline": {
+      "get": {
+        "tags": [
+          "记忆"
+        ],
+        "summary": "Get Timeline",
+        "description": "获取时间线\n\n参数:\n    limit: 返回数量限制\n\n返回:\n    时间线日志列表",
+        "operationId": "get_timeline_memory_blackbox_timeline_get",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 100,
+              "title": "Limit"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/memory/search": {
+      "get": {
+        "tags": [
+          "记忆"
+        ],
+        "summary": "Search Memories",
+        "description": "搜索所有类型的记忆\n\n参数:\n    keywords: 关键词（逗号分隔）\n    limit: 返回数量限制\n\n返回:\n    匹配的记忆列表",
+        "operationId": "search_memories_memory_search_get",
+        "parameters": [
+          {
+            "name": "keywords",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Keywords"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 20,
+              "title": "Limit"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/memory/status": {
+      "get": {
+        "tags": [
+          "记忆"
+        ],
+        "summary": "Get Status",
+        "description": "获取记忆模块综合状态",
+        "operationId": "get_status_memory_status_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/memory/summary": {
+      "get": {
+        "tags": [
+          "记忆"
+        ],
+        "summary": "Get Summary",
+        "description": "获取记忆状态摘要",
+        "operationId": "get_summary_memory_summary_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/memory/snapshot": {
+      "post": {
+        "tags": [
+          "记忆"
+        ],
+        "summary": "Save Snapshot",
+        "description": "保存记忆快照\n\n参数:\n    snapshot_name: 快照名称\n\n返回:\n    快照文件路径",
+        "operationId": "save_snapshot_memory_snapshot_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_save_snapshot_memory_snapshot_post"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/thinking/think": {
+      "post": {
+        "tags": [
+          "思维推理"
+        ],
+        "summary": "Think",
+        "description": "单次思考接口\n\n执行一轮思考流程：主管决策 + 专家执行。\n\n参数:\n    question: 用户问题\n    context: 可选的上下文信息\n\n返回:\n    包含思考结果的字典",
+        "operationId": "think_thinking_think_post",
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_think_thinking_think_post"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/thinking/deep-think": {
+      "post": {
+        "tags": [
+          "思维推理"
+        ],
+        "summary": "Deep Think",
+        "description": "连续深度思考接口\n\n执行多轮深度思考，返回完整思考链数据（用于可视化）。\n\n参数:\n    question: 用户问题\n    max_rounds: 最大思考轮次，默认 10 轮\n\n返回:\n    包含完整思考链和最终答案的字典",
+        "operationId": "deep_think_thinking_deep_think_post",
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_deep_think_thinking_deep_think_post"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/thinking/emotion/judge": {
+      "post": {
+        "tags": [
+          "思维推理"
+        ],
+        "summary": "Judge Emotion",
+        "description": "情感判断接口\n\n分析文本的情感状态，返回情感类型、强度和置信度。\n\n参数:\n    context: 待判断情感的上下文/文本\n\n返回:\n    包含情感判断结果的字典：\n    - emotion: 情感类型（如 happy, sad, angry, neutral 等）\n    - intensity: 情感强度（0.0-1.0）\n    - confidence: 置信度（0.0-1.0）\n    - reasoning: 推理过程说明",
+        "operationId": "judge_emotion_thinking_emotion_judge_post",
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_judge_emotion_thinking_emotion_judge_post"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/thinking/emotion/guide": {
+      "post": {
+        "tags": [
+          "思维推理"
+        ],
+        "summary": "Guide Emotion",
+        "description": "情绪引导接口（思维模块主动触发）\n\n接收思维模块的情绪引导指令，调整情绪状态。\n\n参数:\n    target_emotion: 目标情绪类型（如 focused, calm, agitated 等）\n    target_intensity: 目标强度（0.0-1.0）\n    priority: 优先级（\"normal\" | \"high\"）\n    reason: 引导原因\n\n返回:\n    引导结果信息",
+        "operationId": "guide_emotion_thinking_emotion_guide_post",
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_guide_emotion_thinking_emotion_guide_post"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/thinking/emotion/calibrate": {
+      "post": {
+        "tags": [
+          "思维推理"
+        ],
+        "summary": "Calibrate Emotion",
+        "description": "情绪校准接口（反向校准机制）\n\n当情绪输出与思维需求冲突时，思维模块发送校准信号。\n\n参数:\n    current_scene: 当前场景描述\n    expected_emotion: 期望情绪\n    conflict_reason: 冲突原因\n\n返回:\n    校准后的情绪结果",
+        "operationId": "calibrate_emotion_thinking_emotion_calibrate_post",
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_calibrate_emotion_thinking_emotion_calibrate_post"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/thinking/value/match": {
+      "post": {
+        "tags": [
+          "思维推理"
+        ],
+        "summary": "Match Value",
+        "description": "价值观匹配接口\n\n分析内容与核心价值观的对齐情况。\n\n参数:\n    context: 待评估价值的上下文/文本\n\n返回:\n    包含价值匹配结果的字典：\n    - values: 匹配到的价值观列表\n    - alignment_score: 价值对齐分数（0.0-1.0）\n    - conflicts: 价值冲突列表\n    - suggestion: 建议或改进方向",
+        "operationId": "match_value_thinking_value_match_post",
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_match_value_thinking_value_match_post"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/thinking/experts": {
+      "get": {
+        "tags": [
+          "思维推理"
+        ],
+        "summary": "Get Experts",
+        "description": "获取可用专家列表接口\n\n返回所有可用专家和当前激活的专家。\n\n返回:\n    包含专家列表的字典：\n    - available_experts: 所有可用专家列表\n    - active_experts: 当前激活的专家列表（4 个槽位）",
+        "operationId": "get_experts_thinking_experts_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/thinking/experts/switch": {
+      "post": {
+        "tags": [
+          "思维推理"
+        ],
+        "summary": "Switch Expert",
+        "description": "动态切换专家角色接口\n\n切换指定槽位的专家角色。\n\n参数:\n    slot_id: 槽位 ID（0-3）\n    expert_name: 要切换到的专家名称\n\n返回:\n    切换结果信息",
+        "operationId": "switch_expert_thinking_experts_switch_post",
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_switch_expert_thinking_experts_switch_post"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/thinking/status": {
+      "get": {
+        "tags": [
+          "思维推理"
+        ],
+        "summary": "Get Status",
+        "description": "获取思考引擎状态接口\n\n返回模型加载状态、专家配置等信息。\n\n返回:\n    包含引擎状态的字典：\n    - initialized: 是否已初始化\n    - manager_loaded: 主管模型是否已加载\n    - expert_loaded: 专家模型是否已加载\n    - active_experts: 当前激活的专家列表\n    - total_experts_in_library: 专家库中的专家总数",
+        "operationId": "get_status_thinking_status_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/thinking/emotion/status": {
+      "get": {
+        "tags": [
+          "思维推理"
+        ],
+        "summary": "Get Emotion Status",
+        "description": "获取情绪服务状态接口\n\n返回情绪服务的统计信息和当前情绪状态。\n\n返回:\n    包含情绪服务状态的字典",
+        "operationId": "get_emotion_status_thinking_emotion_status_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/thinking/emotion/history": {
+      "get": {
+        "tags": [
+          "思维推理"
+        ],
+        "summary": "Get Emotion History",
+        "description": "获取情绪历史接口\n\n返回最近的情绪判断记录。\n\n参数:\n    limit: 返回记录数量，默认 10\n\n返回:\n    情绪历史记录列表",
+        "operationId": "get_emotion_history_thinking_emotion_history_get",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 10,
+              "title": "Limit"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/thinking/emotion/validation": {
+      "get": {
+        "tags": [
+          "思维推理"
+        ],
+        "summary": "Get Validation Stats",
+        "description": "获取情绪-思维联动校验统计接口\n\n返回校验器的统计信息和限制配置。\n\n返回:\n    包含校验统计的字典",
+        "operationId": "get_validation_stats_thinking_emotion_validation_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/thinking/emotion/validate": {
+      "post": {
+        "tags": [
+          "思维推理"
+        ],
+        "summary": "Validate Emotion Output",
+        "description": "情绪输出校验接口\n\n校验情绪输出的合理性，防止极端情绪。\n\n参数:\n    emotion: 情绪类型\n    intensity: 情绪强度\n    confidence: 置信度\n\n返回:\n    校验结果",
+        "operationId": "validate_emotion_output_thinking_emotion_validate_post",
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_validate_emotion_output_thinking_emotion_validate_post"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/thinking/emotion/validate-guidance": {
+      "post": {
+        "tags": [
+          "思维推理"
+        ],
+        "summary": "Validate Guidance",
+        "description": "情绪引导校验接口\n\n校验思维模块的情绪引导请求，防止过度干预。\n\n参数:\n    target_emotion: 目标情绪\n    target_intensity: 目标强度\n    priority: 优先级\n\n返回:\n    校验结果",
+        "operationId": "validate_guidance_thinking_emotion_validate_guidance_post",
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_validate_guidance_thinking_emotion_validate_guidance_post"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/thinking/emotion/check-naturalness": {
+      "post": {
+        "tags": [
+          "思维推理"
+        ],
+        "summary": "Check Emotion Naturalness",
+        "description": "情绪自然度检查接口\n\n检查情绪变化的自然度，检测是否过于机械。\n\n返回:\n    自然度评估结果",
+        "operationId": "check_emotion_naturalness_thinking_emotion_check_naturalness_post",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/stream/session": {
+      "post": {
+        "tags": [
+          "流式思考"
+        ],
+        "summary": "Create Session",
+        "description": "创建新会话\n\n返回:\n    session_id: 会话ID",
+        "operationId": "create_session_stream_session_post",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/stream/sse/{session_id}": {
+      "get": {
+        "tags": [
+          "流式思考"
+        ],
+        "summary": "Sse Stream",
+        "description": "SSE 服务端推送接口\n\n使用 EventSource 实现流式输出：\n- 前端通过 EventSource 连接\n- 服务端推送消息到前端",
+        "operationId": "sse_stream_stream_sse__session_id__get",
+        "parameters": [
+          {
+            "name": "session_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Session Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/stream/input/{session_id}": {
+      "post": {
+        "tags": [
+          "流式思考"
+        ],
+        "summary": "Add User Input",
+        "description": "用户输入接口\n\n前端发送用户消息：\n- 消息实时加入消息池\n- 触发思考循环",
+        "operationId": "add_user_input_stream_input__session_id__post",
+        "parameters": [
+          {
+            "name": "session_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Session Id"
+            }
+          },
+          {
+            "name": "content",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Content"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/stream/context/{session_id}": {
+      "get": {
+        "tags": [
+          "流式思考"
+        ],
+        "summary": "Get Context",
+        "description": "获取会话上下文",
+        "operationId": "get_context_stream_context__session_id__get",
+        "parameters": [
+          {
+            "name": "session_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Session Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/stream/session/{session_id}": {
+      "delete": {
+        "tags": [
+          "流式思考"
+        ],
+        "summary": "Close Session",
+        "description": "关闭会话",
+        "operationId": "close_session_stream_session__session_id__delete",
+        "parameters": [
+          {
+            "name": "session_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Session Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/stream/status": {
+      "get": {
+        "tags": [
+          "流式思考"
+        ],
+        "summary": "Get Status",
+        "description": "获取系统状态",
+        "operationId": "get_status_stream_status_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/attention/weight/calculate": {
+      "post": {
+        "tags": [
+          "注意力"
+        ],
+        "summary": "Calculate Weight",
+        "description": "计算注意力权重",
+        "operationId": "calculate_weight_attention_weight_calculate_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "additionalProperties": true,
+                "type": "object",
+                "title": "Input Data"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/attention/task/schedule": {
+      "post": {
+        "tags": [
+          "注意力"
+        ],
+        "summary": "Schedule Tasks",
+        "description": "调度任务优先级",
+        "operationId": "schedule_tasks_attention_task_schedule_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "items": {
+                  "additionalProperties": true,
+                  "type": "object"
+                },
+                "type": "array",
+                "title": "Tasks"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/attention/status": {
+      "get": {
+        "tags": [
+          "注意力"
+        ],
+        "summary": "Get Status",
+        "description": "获取注意力系统状态",
+        "operationId": "get_status_attention_status_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/management/dashboard": {
+      "get": {
+        "tags": [
+          "管理控制台"
+        ],
+        "summary": "Get Dashboard Overview",
+        "description": "获取仪表盘核心数据 (前端首页加载用)\n返回系统健康、资源摘要、模块状态和最新告警。",
+        "operationId": "get_dashboard_overview_management_dashboard_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/management/resources/hardware": {
+      "get": {
+        "tags": [
+          "管理控制台"
+        ],
+        "summary": "Get Hardware Details",
+        "description": "获取详细硬件信息",
+        "operationId": "get_hardware_details_management_resources_hardware_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/management/resources/status": {
+      "get": {
+        "tags": [
+          "管理控制台"
+        ],
+        "summary": "Get Resource Status",
+        "description": "获取资源调度状态 (模型加载情况)",
+        "operationId": "get_resource_status_management_resources_status_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/management/memory/status": {
+      "get": {
+        "tags": [
+          "管理控制台"
+        ],
+        "summary": "Get Memory Status",
+        "description": "获取记忆模块状态 (容量、使用率)",
+        "operationId": "get_memory_status_management_memory_status_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/management/memory/personality": {
+      "get": {
+        "tags": [
+          "管理控制台"
+        ],
+        "summary": "Get Personality",
+        "description": "获取当前人格配置",
+        "operationId": "get_personality_management_memory_personality_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/management/memory/clear_short_term": {
+      "post": {
+        "tags": [
+          "管理控制台"
+        ],
+        "summary": "Clear Short Term Memory",
+        "description": "清空短期记忆 (释放内存)",
+        "operationId": "clear_short_term_memory_management_memory_clear_short_term_post",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/management/emotion/status": {
+      "get": {
+        "tags": [
+          "管理控制台"
+        ],
+        "summary": "Get Emotion Status Api",
+        "description": "获取当前情绪状态",
+        "operationId": "get_emotion_status_api_management_emotion_status_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/management/emotion/guide": {
+      "post": {
+        "tags": [
+          "管理控制台"
+        ],
+        "summary": "Guide Emotion",
+        "description": "手动引导情绪 (前端控制用)\n用于强制 AI 进入特定情绪状态。",
+        "operationId": "guide_emotion_management_emotion_guide_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_guide_emotion_management_emotion_guide_post"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/management/monitor/logs": {
+      "get": {
+        "tags": [
+          "管理控制台"
+        ],
+        "summary": "Get Monitor Logs",
+        "description": "获取监控日志/告警",
+        "operationId": "get_monitor_logs_management_monitor_logs_get",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 50,
+              "title": "Limit"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/management/monitor/modules": {
+      "get": {
+        "tags": [
+          "管理控制台"
+        ],
+        "summary": "Get Module Monitor Status",
+        "description": "获取所有模块详细运行状态",
+        "operationId": "get_module_monitor_status_management_monitor_modules_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/management/actions/restart_module": {
+      "post": {
+        "tags": [
+          "管理控制台"
+        ],
+        "summary": "Restart Module",
+        "description": "重启指定模块 (模拟)",
+        "operationId": "restart_module_management_actions_restart_module_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_restart_module_management_actions_restart_module_post"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/management/status": {
+      "get": {
+        "tags": [
+          "管理控制台"
+        ],
+        "summary": "Get System Status",
+        "description": "获取管理系统自身状态",
+        "operationId": "get_system_status_management_status_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/output/text": {
+      "post": {
+        "tags": [
+          "输出"
+        ],
+        "summary": "Text Output",
+        "description": "文字输出接口",
+        "operationId": "text_output_output_text_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_text_output_output_text_post"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/output/speech": {
+      "post": {
+        "tags": [
+          "输出"
+        ],
+        "summary": "Speech Output",
+        "description": "语音输出接口",
+        "operationId": "speech_output_output_speech_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_speech_output_output_speech_post"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/output/km/control": {
+      "post": {
+        "tags": [
+          "输出"
+        ],
+        "summary": "Km Control",
+        "description": "键鼠控制接口",
+        "operationId": "km_control_output_km_control_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "additionalProperties": true,
+                "type": "object",
+                "title": "Command"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/output/status": {
+      "get": {
+        "tags": [
+          "输出"
+        ],
+        "summary": "Get Status",
+        "description": "获取输出模块状态",
+        "operationId": "get_status_output_status_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/": {
+      "get": {
+        "summary": "Root",
+        "description": "根路径",
+        "operationId": "root__get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/health": {
+      "get": {
+        "summary": "Health Check",
+        "description": "健康检查",
+        "operationId": "health_check_health_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Body_analyze_image_info_process_image_analyze_post": {
+        "properties": {
+          "image_file": {
+            "type": "string",
+            "contentMediaType": "application/octet-stream",
+            "title": "Image File"
+          },
+          "analyze_description": {
+            "type": "boolean",
+            "title": "Analyze Description",
+            "default": false
+          }
+        },
+        "type": "object",
+        "required": [
+          "image_file"
+        ],
+        "title": "Body_analyze_image_info_process_image_analyze_post"
+      },
+      "Body_analyze_text_info_process_text_analyze_post": {
+        "properties": {
+          "text": {
+            "type": "string",
+            "title": "Text"
+          }
+        },
+        "type": "object",
+        "required": [
+          "text"
+        ],
+        "title": "Body_analyze_text_info_process_text_analyze_post"
+      },
+      "Body_calibrate_emotion_thinking_emotion_calibrate_post": {
+        "properties": {
+          "current_scene": {
+            "type": "string",
+            "title": "Current Scene"
+          },
+          "expected_emotion": {
+            "type": "string",
+            "title": "Expected Emotion"
+          },
+          "conflict_reason": {
+            "type": "string",
+            "title": "Conflict Reason"
+          }
+        },
+        "type": "object",
+        "required": [
+          "current_scene",
+          "expected_emotion",
+          "conflict_reason"
+        ],
+        "title": "Body_calibrate_emotion_thinking_emotion_calibrate_post"
+      },
+      "Body_deep_think_thinking_deep_think_post": {
+        "properties": {
+          "question": {
+            "type": "string",
+            "title": "Question"
+          },
+          "max_rounds": {
+            "type": "integer",
+            "title": "Max Rounds",
+            "default": 10
+          }
+        },
+        "type": "object",
+        "required": [
+          "question"
+        ],
+        "title": "Body_deep_think_thinking_deep_think_post"
+      },
+      "Body_guide_emotion_management_emotion_guide_post": {
+        "properties": {
+          "target_emotion": {
+            "type": "string",
+            "title": "Target Emotion"
+          },
+          "intensity": {
+            "type": "number",
+            "title": "Intensity",
+            "default": 0.8
+          },
+          "reason": {
+            "type": "string",
+            "title": "Reason",
+            "default": "Manual override"
+          }
+        },
+        "type": "object",
+        "required": [
+          "target_emotion"
+        ],
+        "title": "Body_guide_emotion_management_emotion_guide_post"
+      },
+      "Body_guide_emotion_thinking_emotion_guide_post": {
+        "properties": {
+          "target_emotion": {
+            "type": "string",
+            "title": "Target Emotion"
+          },
+          "target_intensity": {
+            "type": "number",
+            "title": "Target Intensity",
+            "default": 0.8
+          },
+          "priority": {
+            "type": "string",
+            "title": "Priority",
+            "default": "normal"
+          },
+          "reason": {
+            "type": "string",
+            "title": "Reason",
+            "default": ""
+          }
+        },
+        "type": "object",
+        "required": [
+          "target_emotion"
+        ],
+        "title": "Body_guide_emotion_thinking_emotion_guide_post"
+      },
+      "Body_judge_emotion_thinking_emotion_judge_post": {
+        "properties": {
+          "context": {
+            "type": "string",
+            "title": "Context"
+          }
+        },
+        "type": "object",
+        "required": [
+          "context"
+        ],
+        "title": "Body_judge_emotion_thinking_emotion_judge_post"
+      },
+      "Body_match_value_thinking_value_match_post": {
+        "properties": {
+          "context": {
+            "type": "string",
+            "title": "Context"
+          }
+        },
+        "type": "object",
+        "required": [
+          "context"
+        ],
+        "title": "Body_match_value_thinking_value_match_post"
+      },
+      "Body_recognize_speech_info_process_speech_recognize_post": {
+        "properties": {
+          "audio_file": {
+            "type": "string",
+            "contentMediaType": "application/octet-stream",
+            "title": "Audio File"
+          },
+          "analyze_text": {
+            "type": "boolean",
+            "title": "Analyze Text",
+            "default": false
+          }
+        },
+        "type": "object",
+        "required": [
+          "audio_file"
+        ],
+        "title": "Body_recognize_speech_info_process_speech_recognize_post"
+      },
+      "Body_restart_module_management_actions_restart_module_post": {
+        "properties": {
+          "module_name": {
+            "type": "string",
+            "title": "Module Name"
+          }
+        },
+        "type": "object",
+        "required": [
+          "module_name"
+        ],
+        "title": "Body_restart_module_management_actions_restart_module_post"
+      },
+      "Body_save_long_term_memory_long_term_post": {
+        "properties": {
+          "memory_type": {
+            "type": "string",
+            "title": "Memory Type"
+          },
+          "content": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Content"
+          }
+        },
+        "type": "object",
+        "required": [
+          "memory_type",
+          "content"
+        ],
+        "title": "Body_save_long_term_memory_long_term_post"
+      },
+      "Body_save_snapshot_memory_snapshot_post": {
+        "properties": {
+          "snapshot_name": {
+            "type": "string",
+            "title": "Snapshot Name"
+          }
+        },
+        "type": "object",
+        "required": [
+          "snapshot_name"
+        ],
+        "title": "Body_save_snapshot_memory_snapshot_post"
+      },
+      "Body_speech_output_output_speech_post": {
+        "properties": {
+          "text": {
+            "type": "string",
+            "title": "Text"
+          }
+        },
+        "type": "object",
+        "required": [
+          "text"
+        ],
+        "title": "Body_speech_output_output_speech_post"
+      },
+      "Body_switch_expert_thinking_experts_switch_post": {
+        "properties": {
+          "slot_id": {
+            "type": "integer",
+            "title": "Slot Id"
+          },
+          "expert_name": {
+            "type": "string",
+            "title": "Expert Name"
+          }
+        },
+        "type": "object",
+        "required": [
+          "slot_id",
+          "expert_name"
+        ],
+        "title": "Body_switch_expert_thinking_experts_switch_post"
+      },
+      "Body_text_output_output_text_post": {
+        "properties": {
+          "text": {
+            "type": "string",
+            "title": "Text"
+          }
+        },
+        "type": "object",
+        "required": [
+          "text"
+        ],
+        "title": "Body_text_output_output_text_post"
+      },
+      "Body_think_thinking_think_post": {
+        "properties": {
+          "question": {
+            "type": "string",
+            "title": "Question"
+          },
+          "context": {
+            "type": "string",
+            "title": "Context",
+            "default": ""
+          }
+        },
+        "type": "object",
+        "required": [
+          "question"
+        ],
+        "title": "Body_think_thinking_think_post"
+      },
+      "Body_validate_emotion_output_thinking_emotion_validate_post": {
+        "properties": {
+          "emotion": {
+            "type": "string",
+            "title": "Emotion"
+          },
+          "intensity": {
+            "type": "number",
+            "title": "Intensity"
+          },
+          "confidence": {
+            "type": "number",
+            "title": "Confidence",
+            "default": 0.5
+          }
+        },
+        "type": "object",
+        "required": [
+          "emotion",
+          "intensity"
+        ],
+        "title": "Body_validate_emotion_output_thinking_emotion_validate_post"
+      },
+      "Body_validate_guidance_thinking_emotion_validate_guidance_post": {
+        "properties": {
+          "target_emotion": {
+            "type": "string",
+            "title": "Target Emotion"
+          },
+          "target_intensity": {
+            "type": "number",
+            "title": "Target Intensity",
+            "default": 0.8
+          },
+          "priority": {
+            "type": "string",
+            "title": "Priority",
+            "default": "normal"
+          }
+        },
+        "type": "object",
+        "required": [
+          "target_emotion"
+        ],
+        "title": "Body_validate_guidance_thinking_emotion_validate_guidance_post"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          },
+          "input": {
+            "title": "Input"
+          },
+          "ctx": {
+            "type": "object",
+            "title": "Context"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError"
+      }
+    }
+  }
+}

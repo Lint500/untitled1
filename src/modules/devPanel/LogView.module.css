@@ -1,6 +1,6 @@
 /* LogView 组件私有样式 */
 .logContainer {
-  background-color: #2d2d2d;
+  background-color: #21262d;
   padding: 10px;
   border-radius: 4px;
   height: 300px;
@@ -18,11 +18,11 @@
 .logEntry {
   margin-bottom: 5px;
   padding-bottom: 5px;
-  border-bottom: 1px solid #333;
+  border-bottom: 1px solid #30363d;
 }
 
 .logTimestamp {
-  color: #888;
+  color: #636e7b;
   margin-right: 5px;
 }
 
@@ -35,19 +35,19 @@
 }
 
 .logLevel.info {
-  background-color: #2196F3;
+  background-color: #58a6ff;
 }
 
 .logLevel.warn {
-  background-color: #ff9800;
+  background-color: #d29922;
 }
 
 .logLevel.error {
-  background-color: #f44336;
+  background-color: #f85149;
 }
 
 .logLevel.debug {
-  background-color: #9C27B0;
+  background-color: #a371f7;
 }
 
 .logMessage {
@@ -55,7 +55,7 @@
 }
 
 .logData {
-  background-color: #1a1a1a;
+  background-color: #0d1117;
   padding: 5px;
   margin-left: 10px;
   color: #aaa;

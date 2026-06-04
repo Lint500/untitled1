@@ -1,6 +1,7 @@
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
+import { API_BASE_URL } from './backendConfig';
 
-const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:3001/api';
+const API_KEY = import.meta.env.VITE_API_KEY || '';
 
 /**
  * Axios 请求封装
@@ -20,6 +21,11 @@ class Request {
     // 请求拦截器
     this.instance.interceptors.request.use(
       (config) => {
+        // 后端鉴权（与 SIMPLE_API_KEY 对齐）
+        if (API_KEY) {
+          config.headers['X-API-Key'] = API_KEY;
+        }
+        // 兼容已有 JWT 流程
         const token = localStorage.getItem('token');
         if (token) {
           config.headers.Authorization = `Bearer ${token}`;
@@ -34,28 +40,48 @@ class Request {
     // 响应拦截器
     this.instance.interceptors.response.use(
       (response: AxiosResponse) => {
-        return response.data;
+        const body = response.data;
+        // 后端统一信封：{success: true, data: ...} → 直接返回 data；
+        // 失败信封：{success: false, error: {code, message}} → 抛错
+        // 非信封响应（图片二进制等）原样返回
+        if (body && typeof body === 'object' && 'success' in body) {
+          if (body.success === false) {
+            const code = body.error?.code || 'INTERNAL_ERROR';
+            const msg = body.error?.message || '请求失败';
+            const err = new Error(msg) as Error & { code?: string };
+            err.code = code;
+            return Promise.reject(err);
+          }
+          // success: true → 把 data 字段抽出来返回
+          return 'data' in body ? body.data : body;
+        }
+        return body;
       },
       (error) => {
         if (error.response) {
+          const errBody = error.response.data;
+          const msg = errBody?.error?.message || errBody?.message || error.message;
           switch (error.response.status) {
             case 401:
-              console.error('未授权，请重新登录');
+              console.error('[API] 未授权，请检查 VITE_API_KEY 是否与后端 SIMPLE_API_KEY 一致');
               break;
             case 403:
-              console.error('拒绝访问');
+              console.error('[API] 拒绝访问');
               break;
             case 404:
-              console.error('请求资源不存在');
+              console.error('[API] 资源不存在:', error.config?.url);
+              break;
+            case 429:
+              console.warn('[API] 请求频率超限');
               break;
             case 500:
-              console.error('服务器错误');
+              console.error('[API] 服务器错误:', msg);
               break;
             default:
-              console.error(error.response.data.message || '请求失败');
+              console.error('[API]', msg);
           }
         } else {
-          console.error('网络错误');
+          console.error('[API] 网络错误', error.message);
         }
         return Promise.reject(error);
       }

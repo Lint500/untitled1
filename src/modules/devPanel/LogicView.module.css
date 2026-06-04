@@ -1,6 +1,6 @@
 /* LogicView 组件私有样式 */
 .logicContainer {
-  background-color: #2d2d2d;
+  background-color: #21262d;
   padding: 15px;
   border-radius: 4px;
   height: 300px;
@@ -23,11 +23,11 @@
 }
 
 .statusSuccess {
-  color: #4CAF50;
+  color: #3fb950;
 }
 
 .statusTitle {
-  color: #4CAF50;
+  color: #3fb950;
   margin-bottom: 10px;
   font-weight: 600;
 }

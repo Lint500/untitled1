@@ -1,0 +1,5817 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Humanoid AGI",
+    "description": "类人智能架构系统 API",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/speech/recognize": {
+      "post": {
+        "tags": [
+          "信息处理"
+        ],
+        "summary": "Recognize Speech",
+        "description": "语音识别接口\n\n参数:\n    audio_file: 音频文件\n    language: 语言代码（auto/zh/en/ja/ko等）\n    task: transcribe(转写) / translate(翻译)\n\n返回:\n    {\n        \"success\": true,\n        \"text\": \"识别文本\",\n        \"language\": \"zh\",\n        \"confidence\": 0.95,\n        \"segments\": [...]\n    }",
+        "operationId": "recognize_speech_speech_recognize_post",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_recognize_speech_speech_recognize_post"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/speech/recognize-base64": {
+      "post": {
+        "tags": [
+          "信息处理"
+        ],
+        "summary": "Recognize Speech Base64",
+        "description": "Base64音频识别",
+        "operationId": "recognize_speech_base64_speech_recognize_base64_post",
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_recognize_speech_base64_speech_recognize_base64_post"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/image/analyze": {
+      "post": {
+        "tags": [
+          "信息处理"
+        ],
+        "summary": "Analyze Image",
+        "description": "图像分析接口\n\n参数:\n    image_file: 图像文件\n    prompt: 分析提示词\n\n返回:\n    {\n        \"success\": true,\n        \"description\": \"图像描述\",\n        \"objects\": [...],\n        \"scene\": \"场景类型\",\n        \"colors\": [...]\n    }",
+        "operationId": "analyze_image_image_analyze_post",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_analyze_image_image_analyze_post"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/image/analyze-url": {
+      "post": {
+        "tags": [
+          "信息处理"
+        ],
+        "summary": "Analyze Image Url",
+        "description": "分析网络图片URL",
+        "operationId": "analyze_image_url_image_analyze_url_post",
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_analyze_image_url_image_analyze_url_post"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/image/analyze-base64": {
+      "post": {
+        "tags": [
+          "信息处理"
+        ],
+        "summary": "Analyze Image Base64",
+        "description": "分析Base64编码的图片",
+        "operationId": "analyze_image_base64_image_analyze_base64_post",
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_analyze_image_base64_image_analyze_base64_post"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/status": {
+      "get": {
+        "tags": [
+          "信息处理"
+        ],
+        "summary": "Get Status",
+        "description": "获取信息处理模块状态",
+        "operationId": "get_status_status_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/image/detect-ui": {
+      "post": {
+        "tags": [
+          "信息处理"
+        ],
+        "summary": "Detect Ui Elements",
+        "description": "UI元素检测接口\n\n检测图像中的UI元素（按钮、输入框、图标等）\n\n参数:\n    image_file: 图像文件\n    element_types: 要检测的元素类型（逗号分隔，如: button,input,icon）\n\n返回:\n    {\n        \"elements\": [\n            {\n                \"type\": \"button\",\n                \"text\": \"提交\",\n                \"bounds\": {\"x\": 100, \"y\": 200, \"width\": 80, \"height\": 30},\n                \"center\": {\"x\": 140, \"y\": 215},\n                \"colors\": {\"bg\": \"#3498db\", \"text\": \"#ffffff\"},\n                \"confidence\": 0.95\n            }\n        ],\n        \"layout\": {\"width\": 1920, \"height\": 1080, \"grid\": \"3x4\"}\n    }",
+        "operationId": "detect_ui_elements_image_detect_ui_post",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_detect_ui_elements_image_detect_ui_post"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/image/analyze-query": {
+      "post": {
+        "tags": [
+          "信息处理"
+        ],
+        "summary": "Analyze With Query",
+        "description": "带自然语言查询的图像分析\n\n可以问\"按钮在哪个位置\"、\"某个元素是什么颜色\"等问题\n\n参数:\n    image_file: 图像文件\n    query: 分析查询\n\n返回:\n    {\n        \"answer\": \"在坐标(100,200)处有一个蓝色按钮'提交'\",\n        \"elements\": [...],\n        \"coordinates\": {\"x\": 100, \"y\": 200}\n    }",
+        "operationId": "analyze_with_query_image_analyze_query_post",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_analyze_with_query_image_analyze_query_post"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/image/draw-elements": {
+      "post": {
+        "tags": [
+          "信息处理"
+        ],
+        "summary": "Draw Ui Elements",
+        "description": "在图像上绘制UI元素标注\n\n参数:\n    image_file: 原始图像\n    element_data: JSON格式的UI元素列表\n\n返回:\n    标注后的图像文件",
+        "operationId": "draw_ui_elements_image_draw_elements_post",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_draw_ui_elements_image_draw_elements_post"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tools/": {
+      "get": {
+        "tags": [
+          "工具"
+        ],
+        "summary": "List Tools",
+        "description": "列出所有可用工具",
+        "operationId": "list_tools_tools__get",
+        "parameters": [
+          {
+            "name": "source",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "description": "来源过滤: builtin/plugin/dynamic",
+              "title": "Source"
+            },
+            "description": "来源过滤: builtin/plugin/dynamic"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tools/status": {
+      "get": {
+        "tags": [
+          "工具"
+        ],
+        "summary": "Get Tool Status",
+        "description": "获取工具管理器状态",
+        "operationId": "get_tool_status_tools_status_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tools/call": {
+      "post": {
+        "tags": [
+          "工具"
+        ],
+        "summary": "Call Tool",
+        "description": "调用工具",
+        "operationId": "call_tool_tools_call_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_call_tool_tools_call_post"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tools/call-sync": {
+      "post": {
+        "tags": [
+          "工具"
+        ],
+        "summary": "Call Tool Sync",
+        "description": "同步调用工具",
+        "operationId": "call_tool_sync_tools_call_sync_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_call_tool_sync_tools_call_sync_post"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tools/call-json": {
+      "post": {
+        "tags": [
+          "工具"
+        ],
+        "summary": "Call From Json",
+        "description": "从JSON调用工具",
+        "operationId": "call_from_json_tools_call_json_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "string",
+                "title": "Json Str",
+                "description": "JSON格式的工具调用"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tools/events": {
+      "get": {
+        "tags": [
+          "工具"
+        ],
+        "summary": "Get Tool Events",
+        "description": "获取工具调用历史",
+        "operationId": "get_tool_events_tools_events_get",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 1000,
+              "minimum": 1,
+              "description": "返回数量",
+              "default": 50,
+              "title": "Limit"
+            },
+            "description": "返回数量"
+          },
+          {
+            "name": "tool_name",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "description": "按工具名过滤",
+              "title": "Tool Name"
+            },
+            "description": "按工具名过滤"
+          },
+          {
+            "name": "success",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "boolean"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "按成功/失败过滤",
+              "title": "Success"
+            },
+            "description": "按成功/失败过滤"
+          },
+          {
+            "name": "since",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "number",
+              "description": "起始时间戳",
+              "title": "Since"
+            },
+            "description": "起始时间戳"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "工具"
+        ],
+        "summary": "Clear Tool Events",
+        "description": "清空工具调用历史",
+        "operationId": "clear_tool_events_tools_events_delete",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tools/events/stats": {
+      "get": {
+        "tags": [
+          "工具"
+        ],
+        "summary": "Get Tool Event Stats",
+        "description": "获取工具调用统计",
+        "operationId": "get_tool_event_stats_tools_events_stats_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tools/register": {
+      "post": {
+        "tags": [
+          "工具"
+        ],
+        "summary": "Register Tool",
+        "description": "手动注册工具",
+        "operationId": "register_tool_tools_register_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_register_tool_tools_register_post"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tools/reload/{plugin_name}": {
+      "post": {
+        "tags": [
+          "工具"
+        ],
+        "summary": "Reload Plugin Tools",
+        "description": "重新加载插件工具",
+        "operationId": "reload_plugin_tools_tools_reload__plugin_name__post",
+        "parameters": [
+          {
+            "name": "plugin_name",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "插件名称",
+              "title": "Plugin Name"
+            },
+            "description": "插件名称"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tools/plugins/loaded": {
+      "get": {
+        "tags": [
+          "工具"
+        ],
+        "summary": "Get Loaded Plugins",
+        "description": "获取已加载工具的插件列表",
+        "operationId": "get_loaded_plugins_tools_plugins_loaded_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tools/info/{tool_name}": {
+      "get": {
+        "tags": [
+          "工具"
+        ],
+        "summary": "Get Tool Info",
+        "description": "获取工具详情",
+        "operationId": "get_tool_info_tools_info__tool_name__get",
+        "parameters": [
+          {
+            "name": "tool_name",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "工具名称",
+              "title": "Tool Name"
+            },
+            "description": "工具名称"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tools/{tool_name}": {
+      "get": {
+        "tags": [
+          "工具"
+        ],
+        "summary": "Get Tool Info Legacy",
+        "description": "获取工具详情（兼容旧路径）",
+        "operationId": "get_tool_info_legacy_tools__tool_name__get",
+        "parameters": [
+          {
+            "name": "tool_name",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "工具名称",
+              "title": "Tool Name"
+            },
+            "description": "工具名称"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/memory/short-term/dialog": {
+      "post": {
+        "tags": [
+          "记忆"
+        ],
+        "summary": "Add Dialog",
+        "description": "添加对话到短期记忆\n\n参数:\n    role: 角色 (user, assistant, system)\n    text: 对话内容\n    metadata: 元数据\n\n返回:\n    添加的对话记录",
+        "operationId": "add_dialog_memory_short_term_dialog_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "additionalProperties": true,
+                "type": "object",
+                "title": "Request"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/memory/short-term/context": {
+      "get": {
+        "tags": [
+          "记忆"
+        ],
+        "summary": "Get Context",
+        "description": "获取对话上下文\n\n参数:\n    limit: 返回轮次限制\n\n返回:\n    对话上下文列表",
+        "operationId": "get_context_memory_short_term_context_get",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 20,
+              "title": "Limit"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/memory/short-term/working": {
+      "post": {
+        "tags": [
+          "记忆"
+        ],
+        "summary": "Set Working Memory",
+        "operationId": "set_working_memory_memory_short_term_working_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "additionalProperties": true,
+                "type": "object",
+                "title": "Request"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/memory/short-term/working/{key}": {
+      "get": {
+        "tags": [
+          "记忆"
+        ],
+        "summary": "Get Working Memory",
+        "description": "获取工作记忆\n\n参数:\n    key: 键\n\n返回:\n    工作记忆值",
+        "operationId": "get_working_memory_memory_short_term_working__key__get",
+        "parameters": [
+          {
+            "name": "key",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Key"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/memory/short-term/emotion": {
+      "get": {
+        "tags": [
+          "记忆"
+        ],
+        "summary": "Get Current Emotion",
+        "description": "获取当前情绪",
+        "operationId": "get_current_emotion_memory_short_term_emotion_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "记忆"
+        ],
+        "summary": "Set Current Emotion",
+        "description": "设置当前情绪\n\n参数:\n    emotion: 情绪数据\n\n返回:\n    操作结果",
+        "operationId": "set_current_emotion_memory_short_term_emotion_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "additionalProperties": true,
+                "type": "object",
+                "title": "Emotion"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/memory/short-term/clear": {
+      "delete": {
+        "tags": [
+          "记忆"
+        ],
+        "summary": "Clear Short Term",
+        "description": "清空短期记忆",
+        "operationId": "clear_short_term_memory_short_term_clear_delete",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/memory/long-term": {
+      "post": {
+        "tags": [
+          "记忆"
+        ],
+        "summary": "Save Long Term",
+        "description": "保存长期记忆\n\n参数:\n    memory_type: 记忆类型 (dialog, thought, preference, summary, evolution, event)\n    content: 记忆内容\n\n返回:\n    保存的记忆记录",
+        "operationId": "save_long_term_memory_long_term_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_save_long_term_memory_long_term_post"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/memory/long-term/{memory_type}": {
+      "get": {
+        "tags": [
+          "记忆"
+        ],
+        "summary": "Load Long Term",
+        "description": "加载长期记忆\n\n参数:\n    memory_type: 记忆类型\n    limit: 返回数量限制\n\n返回:\n    记忆列表",
+        "operationId": "load_long_term_memory_long_term__memory_type__get",
+        "parameters": [
+          {
+            "name": "memory_type",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Memory Type"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 50,
+              "title": "Limit"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/memory/long-term/{memory_type}/search": {
+      "get": {
+        "tags": [
+          "记忆"
+        ],
+        "summary": "Search Long Term",
+        "description": "搜索长期记忆\n\n参数:\n    memory_type: 记忆类型\n    keywords: 关键词（逗号分隔）\n    limit: 返回数量限制\n\n返回:\n    匹配的记忆列表",
+        "operationId": "search_long_term_memory_long_term__memory_type__search_get",
+        "parameters": [
+          {
+            "name": "memory_type",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Memory Type"
+            }
+          },
+          {
+            "name": "keywords",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Keywords"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 20,
+              "title": "Limit"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/memory/long-term/{memory_id}": {
+      "delete": {
+        "tags": [
+          "记忆"
+        ],
+        "summary": "Delete Long Term",
+        "description": "删除长期记忆\n\n参数:\n    memory_id: 记忆 ID\n    memory_type: 记忆类型（可选）\n\n返回:\n    删除的记录数",
+        "operationId": "delete_long_term_memory_long_term__memory_id__delete",
+        "parameters": [
+          {
+            "name": "memory_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Memory Id"
+            }
+          },
+          {
+            "name": "memory_type",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "title": "Memory Type"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/memory/personality": {
+      "get": {
+        "tags": [
+          "记忆"
+        ],
+        "summary": "Get Personality",
+        "description": "获取完整人格配置",
+        "operationId": "get_personality_memory_personality_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/memory/personality/trait/{key}": {
+      "get": {
+        "tags": [
+          "记忆"
+        ],
+        "summary": "Get Personality Trait",
+        "description": "获取人格特征\n\n参数:\n    key: 特征键名\n    default: 默认值\n\n返回:\n    特征值",
+        "operationId": "get_personality_trait_memory_personality_trait__key__get",
+        "parameters": [
+          {
+            "name": "key",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Key"
+            }
+          },
+          {
+            "name": "default",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "title": "Default"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "记忆"
+        ],
+        "summary": "Update Personality Trait",
+        "operationId": "update_personality_trait_memory_personality_trait__key__put",
+        "parameters": [
+          {
+            "name": "key",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Key"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": true,
+                "title": "Request"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/memory/personality/values": {
+      "get": {
+        "tags": [
+          "记忆"
+        ],
+        "summary": "Get Values",
+        "description": "获取价值观倾向",
+        "operationId": "get_values_memory_personality_values_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/memory/blackbox/{log_type}": {
+      "get": {
+        "tags": [
+          "记忆"
+        ],
+        "summary": "Get Blackbox Logs",
+        "description": "获取黑匣子日志\n\n参数:\n    log_type: 日志类型 (thinking, module_call, emotion, evolution, error)\n    limit: 返回数量限制\n\n返回:\n    日志列表",
+        "operationId": "get_blackbox_logs_memory_blackbox__log_type__get",
+        "parameters": [
+          {
+            "name": "log_type",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Log Type"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 50,
+              "title": "Limit"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/memory/blackbox/timeline": {
+      "get": {
+        "tags": [
+          "记忆"
+        ],
+        "summary": "Get Timeline",
+        "description": "获取时间线\n\n参数:\n    limit: 返回数量限制\n\n返回:\n    时间线日志列表",
+        "operationId": "get_timeline_memory_blackbox_timeline_get",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 100,
+              "title": "Limit"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/memory/search": {
+      "get": {
+        "tags": [
+          "记忆"
+        ],
+        "summary": "Search Memories",
+        "description": "搜索所有类型的记忆\n\n参数:\n    keywords: 关键词（逗号分隔）\n    limit: 返回数量限制\n\n返回:\n    匹配的记忆列表",
+        "operationId": "search_memories_memory_search_get",
+        "parameters": [
+          {
+            "name": "keywords",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Keywords"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 20,
+              "title": "Limit"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/memory/status": {
+      "get": {
+        "tags": [
+          "记忆"
+        ],
+        "summary": "Get Status",
+        "description": "获取记忆模块综合状态",
+        "operationId": "get_status_memory_status_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/memory/summary": {
+      "get": {
+        "tags": [
+          "记忆"
+        ],
+        "summary": "Get Summary",
+        "description": "获取记忆状态摘要",
+        "operationId": "get_summary_memory_summary_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/memory/snapshot": {
+      "post": {
+        "tags": [
+          "记忆"
+        ],
+        "summary": "Save Snapshot",
+        "description": "保存记忆快照\n\n参数:\n    snapshot_name: 快照名称\n\n返回:\n    快照文件路径",
+        "operationId": "save_snapshot_memory_snapshot_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_save_snapshot_memory_snapshot_post"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/stream/session": {
+      "post": {
+        "tags": [
+          "流式思考"
+        ],
+        "summary": "Create Session",
+        "description": "创建流式会话",
+        "operationId": "create_session_stream_session_post",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/stream/sse/{session_id}": {
+      "get": {
+        "tags": [
+          "流式思考"
+        ],
+        "summary": "Sse Session Get",
+        "description": "SSE 流式响应（GET）",
+        "operationId": "sse_session_get_stream_sse__session_id__get",
+        "parameters": [
+          {
+            "name": "session_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Session Id"
+            }
+          },
+          {
+            "name": "question",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "",
+              "title": "Question"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "流式思考"
+        ],
+        "summary": "Sse Session Post",
+        "description": "SSE 流式响应（POST，兼容旧客户端）",
+        "operationId": "sse_session_post_stream_sse__session_id__post",
+        "parameters": [
+          {
+            "name": "session_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Session Id"
+            }
+          },
+          {
+            "name": "question",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "",
+              "title": "Question"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/stream/context/{session_id}": {
+      "get": {
+        "tags": [
+          "流式思考"
+        ],
+        "summary": "Get Context",
+        "description": "获取会话上下文（兼容 CLI: /stream/context/{session_id}）",
+        "operationId": "get_context_stream_context__session_id__get",
+        "parameters": [
+          {
+            "name": "session_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Session Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/stream/session/{session_id}": {
+      "get": {
+        "tags": [
+          "流式思考"
+        ],
+        "summary": "Get Session Context",
+        "description": "获取会话上下文（保留旧接口）",
+        "operationId": "get_session_context_stream_session__session_id__get",
+        "parameters": [
+          {
+            "name": "session_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Session Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "流式思考"
+        ],
+        "summary": "Close Session",
+        "description": "关闭会话",
+        "operationId": "close_session_stream_session__session_id__delete",
+        "parameters": [
+          {
+            "name": "session_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Session Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/stream/status": {
+      "get": {
+        "tags": [
+          "流式思考"
+        ],
+        "summary": "Get Status",
+        "description": "获取系统状态",
+        "operationId": "get_status_stream_status_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/attention/weight/calculate": {
+      "post": {
+        "tags": [
+          "注意力"
+        ],
+        "summary": "Calculate Weight",
+        "description": "计算注意力权重\n\n结合多维度因子计算综合注意力权重：\n- base_weight: 基础权重 (0-1)\n- sound_level: 声音紧急度 (0-1)\n- visual_level: 视觉紧急度 (0-1)\n- task_priority: 任务优先级 (0-1)\n- emotion_intensity: 情绪强度 (0-1)\n\n返回归一化后的权重值 (0-1)",
+        "operationId": "calculate_weight_attention_weight_calculate_post",
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_calculate_weight_attention_weight_calculate_post"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/attention/memory/recall": {
+      "post": {
+        "tags": [
+          "注意力"
+        ],
+        "summary": "Recall Memories",
+        "description": "通过注意力模块分层召回记忆\n\n实现三层记忆召回策略：\n- 近 30 分钟记忆：完整保留，不经过打分\n- 30 分钟 ~ 7 天记忆：经注意力打分筛选\n- 长期记忆：经关键词初筛 + 注意力打分筛选\n\n参数:\n    query: 查询文本\n    attention_level: 注意力水平 (0-1)，默认 0.6\n\n返回:\n    分层召回的记忆结果",
+        "operationId": "recall_memories_attention_memory_recall_post",
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_recall_memories_attention_memory_recall_post"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/attention/task/schedule": {
+      "post": {
+        "tags": [
+          "注意力"
+        ],
+        "summary": "Schedule Tasks",
+        "description": "调度任务优先级\n\n根据任务优先级对任务列表进行排序\n\n参数:\n    tasks: 任务列表，每个任务应包含 priority 字段\n\n返回:\n    排序后的任务列表及调度信息",
+        "operationId": "schedule_tasks_attention_task_schedule_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "items": {
+                  "additionalProperties": true,
+                  "type": "object"
+                },
+                "type": "array",
+                "title": "Tasks"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/attention/status": {
+      "get": {
+        "tags": [
+          "注意力"
+        ],
+        "summary": "Get Status",
+        "description": "获取注意力系统状态\n\n返回各组件初始化状态及当前注意力水平",
+        "operationId": "get_status_attention_status_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/attention/analyze": {
+      "post": {
+        "tags": [
+          "注意力"
+        ],
+        "summary": "Analyze Attention",
+        "description": "分析用户输入的注意力决策\n\n根据用户输入和上下文，决定激活哪些模块、休眠哪些模块\n\n参数:\n    user_input: 用户输入文本\n    context: 对话上下文（可选）\n    short_term_memory: 短期记忆列表（可选）\n\n返回:\n    注意力决策结果",
+        "operationId": "analyze_attention_attention_analyze_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_analyze_attention_attention_analyze_post"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/attention/memory/score": {
+      "post": {
+        "tags": [
+          "注意力"
+        ],
+        "summary": "Score Memories",
+        "description": "对记忆列表进行注意力打分\n\n根据查询文本和注意力水平，对记忆列表进行评分和筛选\n\n参数:\n    query: 查询文本\n    memories: 记忆列表\n    attention_level: 注意力水平 (0-1)，默认 0.6\n\n返回:\n    打分后的记忆列表",
+        "operationId": "score_memories_attention_memory_score_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_score_memories_attention_memory_score_post"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/management/dashboard": {
+      "get": {
+        "tags": [
+          "管理控制台"
+        ],
+        "summary": "Get Dashboard",
+        "description": "获取仪表盘核心数据\n\n返回：系统健康、资源摘要、模块状态、感知动态",
+        "operationId": "get_dashboard_management_dashboard_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/management/system": {
+      "get": {
+        "tags": [
+          "管理控制台"
+        ],
+        "summary": "Get System Info",
+        "description": "获取完整系统信息",
+        "operationId": "get_system_info_management_system_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/management/system/process": {
+      "get": {
+        "tags": [
+          "管理控制台"
+        ],
+        "summary": "Get Process Info",
+        "description": "获取当前进程信息",
+        "operationId": "get_process_info_management_system_process_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/management/modules": {
+      "get": {
+        "tags": [
+          "管理控制台"
+        ],
+        "summary": "Get All Modules",
+        "description": "获取所有模块列表",
+        "operationId": "get_all_modules_management_modules_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/management/modules/status": {
+      "get": {
+        "tags": [
+          "管理控制台"
+        ],
+        "summary": "Get Modules Status",
+        "description": "获取所有模块状态详情",
+        "operationId": "get_modules_status_management_modules_status_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/management/modules/{module_name}": {
+      "get": {
+        "tags": [
+          "管理控制台"
+        ],
+        "summary": "Get Module Detail",
+        "description": "获取单个模块详情",
+        "operationId": "get_module_detail_management_modules__module_name__get",
+        "parameters": [
+          {
+            "name": "module_name",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "模块名称",
+              "title": "Module Name"
+            },
+            "description": "模块名称"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/management/modules/{module_name}/refresh": {
+      "post": {
+        "tags": [
+          "管理控制台"
+        ],
+        "summary": "Refresh Module",
+        "description": "刷新模块状态",
+        "operationId": "refresh_module_management_modules__module_name__refresh_post",
+        "parameters": [
+          {
+            "name": "module_name",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "模块名称",
+              "title": "Module Name"
+            },
+            "description": "模块名称"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/management/memory": {
+      "get": {
+        "tags": [
+          "管理控制台"
+        ],
+        "summary": "Get Memory Full",
+        "description": "获取记忆模块完整信息",
+        "operationId": "get_memory_full_management_memory_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/management/memory/tool-skills": {
+      "get": {
+        "tags": [
+          "管理控制台"
+        ],
+        "summary": "Get Tool Skills",
+        "description": "获取工具熟练度",
+        "operationId": "get_tool_skills_management_memory_tool_skills_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/management/memory/tool-skills/{tool_name}/success": {
+      "post": {
+        "tags": [
+          "管理控制台"
+        ],
+        "summary": "Record Tool Success",
+        "description": "记录工具使用成功",
+        "operationId": "record_tool_success_management_memory_tool_skills__tool_name__success_post",
+        "parameters": [
+          {
+            "name": "tool_name",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "工具名称",
+              "title": "Tool Name"
+            },
+            "description": "工具名称"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/management/memory/tool-skills/{tool_name}/failure": {
+      "post": {
+        "tags": [
+          "管理控制台"
+        ],
+        "summary": "Record Tool Failure",
+        "description": "记录工具使用失败",
+        "operationId": "record_tool_failure_management_memory_tool_skills__tool_name__failure_post",
+        "parameters": [
+          {
+            "name": "tool_name",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "工具名称",
+              "title": "Tool Name"
+            },
+            "description": "工具名称"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/management/memory/clear": {
+      "post": {
+        "tags": [
+          "管理控制台"
+        ],
+        "summary": "Clear Memory",
+        "description": "清空记忆",
+        "operationId": "clear_memory_management_memory_clear_post",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "description": "清理范围: short_term / long_term / all",
+              "default": "short_term",
+              "title": "Scope"
+            },
+            "description": "清理范围: short_term / long_term / all"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/management/perception": {
+      "get": {
+        "tags": [
+          "管理控制台"
+        ],
+        "summary": "Get Perception Full",
+        "description": "获取感知模块完整信息",
+        "operationId": "get_perception_full_management_perception_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/management/perception/start": {
+      "post": {
+        "tags": [
+          "管理控制台"
+        ],
+        "summary": "Start Perception",
+        "description": "启动感知监控",
+        "operationId": "start_perception_management_perception_start_post",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/management/perception/stop": {
+      "post": {
+        "tags": [
+          "管理控制台"
+        ],
+        "summary": "Stop Perception",
+        "description": "停止感知监控",
+        "operationId": "stop_perception_management_perception_stop_post",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/management/perception/clear": {
+      "post": {
+        "tags": [
+          "管理控制台"
+        ],
+        "summary": "Clear Perception",
+        "description": "清空调知池",
+        "operationId": "clear_perception_management_perception_clear_post",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/management/database": {
+      "get": {
+        "tags": [
+          "管理控制台"
+        ],
+        "summary": "Get Database Info",
+        "description": "获取数据库信息",
+        "operationId": "get_database_info_management_database_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/management/resources": {
+      "get": {
+        "tags": [
+          "管理控制台"
+        ],
+        "summary": "Get Resources",
+        "description": "获取资源使用情况",
+        "operationId": "get_resources_management_resources_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/management/info-process": {
+      "get": {
+        "tags": [
+          "管理控制台"
+        ],
+        "summary": "Get Info Process Status",
+        "description": "获取信息处理模块状态",
+        "operationId": "get_info_process_status_management_info_process_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/management/thinking": {
+      "get": {
+        "tags": [
+          "管理控制台"
+        ],
+        "summary": "Get Thinking Status",
+        "description": "获取思维模块状态",
+        "operationId": "get_thinking_status_management_thinking_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/management/attention": {
+      "get": {
+        "tags": [
+          "管理控制台"
+        ],
+        "summary": "Get Attention Status",
+        "description": "获取注意力模块状态",
+        "operationId": "get_attention_status_management_attention_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/management/security": {
+      "get": {
+        "tags": [
+          "管理控制台"
+        ],
+        "summary": "Get Security Status",
+        "description": "获取安全模块状态",
+        "operationId": "get_security_status_management_security_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/management/health": {
+      "get": {
+        "tags": [
+          "管理控制台"
+        ],
+        "summary": "Health Check",
+        "description": "健康检查",
+        "operationId": "health_check_management_health_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/management/": {
+      "get": {
+        "tags": [
+          "管理控制台"
+        ],
+        "summary": "Root",
+        "description": "管理API根路径",
+        "operationId": "root_management__get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/management/metrics/live": {
+      "get": {
+        "tags": [
+          "管理控制台"
+        ],
+        "summary": "Get Live Metrics",
+        "description": "获取实时指标\n\n返回当前所有活跃指标的实时值",
+        "operationId": "get_live_metrics_management_metrics_live_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/management/metrics/history/{metric_name}": {
+      "get": {
+        "tags": [
+          "管理控制台"
+        ],
+        "summary": "Get Metric History",
+        "description": "获取指标历史\n\n返回指定指标的历史数据",
+        "operationId": "get_metric_history_management_metrics_history__metric_name__get",
+        "parameters": [
+          {
+            "name": "metric_name",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "指标名称",
+              "title": "Metric Name"
+            },
+            "description": "指标名称"
+          },
+          {
+            "name": "start",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "number",
+              "description": "开始时间戳",
+              "title": "Start"
+            },
+            "description": "开始时间戳"
+          },
+          {
+            "name": "end",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "number",
+              "description": "结束时间戳",
+              "title": "End"
+            },
+            "description": "结束时间戳"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 1000,
+              "minimum": 1,
+              "description": "返回数量",
+              "default": 100,
+              "title": "Limit"
+            },
+            "description": "返回数量"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/management/metrics/stats/{metric_name}": {
+      "get": {
+        "tags": [
+          "管理控制台"
+        ],
+        "summary": "Get Metric Stats",
+        "description": "获取指标统计\n\n返回直方图指标的统计信息 (avg, p50, p95, p99, max)",
+        "operationId": "get_metric_stats_management_metrics_stats__metric_name__get",
+        "parameters": [
+          {
+            "name": "metric_name",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Metric Name"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/management/alerts": {
+      "get": {
+        "tags": [
+          "管理控制台"
+        ],
+        "summary": "Get Alerts",
+        "description": "获取告警列表\n\n返回系统告警历史",
+        "operationId": "get_alerts_management_alerts_get",
+        "parameters": [
+          {
+            "name": "severity",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "description": "告警级别过滤",
+              "title": "Severity"
+            },
+            "description": "告警级别过滤"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 500,
+              "minimum": 1,
+              "default": 100,
+              "title": "Limit"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/management/alerts/summary": {
+      "get": {
+        "tags": [
+          "管理控制台"
+        ],
+        "summary": "Get Alert Summary",
+        "description": "获取告警摘要\n\n返回告警统计信息",
+        "operationId": "get_alert_summary_management_alerts_summary_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/management/alerts/rules": {
+      "get": {
+        "tags": [
+          "管理控制台"
+        ],
+        "summary": "Get Alert Rules",
+        "description": "获取告警规则\n\n返回所有告警规则",
+        "operationId": "get_alert_rules_management_alerts_rules_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "管理控制台"
+        ],
+        "summary": "Create Alert Rule",
+        "description": "创建告警规则\n\n创建新的告警规则",
+        "operationId": "create_alert_rule_management_alerts_rules_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "additionalProperties": true,
+                "type": "object",
+                "title": "Request"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/management/alerts/rules/{rule_name}": {
+      "delete": {
+        "tags": [
+          "管理控制台"
+        ],
+        "summary": "Delete Alert Rule",
+        "description": "删除告警规则\n\n删除指定告警规则",
+        "operationId": "delete_alert_rule_management_alerts_rules__rule_name__delete",
+        "parameters": [
+          {
+            "name": "rule_name",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Rule Name"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/management/alerts/clear": {
+      "post": {
+        "tags": [
+          "管理控制台"
+        ],
+        "summary": "Clear Alerts",
+        "description": "清除所有告警",
+        "operationId": "clear_alerts_management_alerts_clear_post",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/management/health/detailed": {
+      "get": {
+        "tags": [
+          "管理控制台"
+        ],
+        "summary": "Detailed Health Check",
+        "description": "详细健康检查\n\n执行完整系统健康检查",
+        "operationId": "detailed_health_check_management_health_detailed_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/management/health/{module}": {
+      "get": {
+        "tags": [
+          "管理控制台"
+        ],
+        "summary": "Check Module Health",
+        "description": "检查指定模块健康状态",
+        "operationId": "check_module_health_management_health__module__get",
+        "parameters": [
+          {
+            "name": "module",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Module"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/management/health/{module}/repair": {
+      "post": {
+        "tags": [
+          "管理控制台"
+        ],
+        "summary": "Repair Module",
+        "description": "自动修复模块\n\n尝试自动修复指定模块",
+        "operationId": "repair_module_management_health__module__repair_post",
+        "parameters": [
+          {
+            "name": "module",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Module"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/management/timeseries/stats": {
+      "get": {
+        "tags": [
+          "管理控制台"
+        ],
+        "summary": "Get Timeseries Stats",
+        "description": "获取时序数据库统计",
+        "operationId": "get_timeseries_stats_management_timeseries_stats_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/management/timeseries/events": {
+      "get": {
+        "tags": [
+          "管理控制台"
+        ],
+        "summary": "Get Events",
+        "description": "获取事件列表",
+        "operationId": "get_events_management_timeseries_events_get",
+        "parameters": [
+          {
+            "name": "event_type",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "title": "Event Type"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 500,
+              "minimum": 1,
+              "default": 100,
+              "title": "Limit"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/management/timeseries/cleanup": {
+      "post": {
+        "tags": [
+          "管理控制台"
+        ],
+        "summary": "Cleanup Timeseries",
+        "description": "清理过期数据\n\n清理指定天数之前的时序数据",
+        "operationId": "cleanup_timeseries_management_timeseries_cleanup_post",
+        "parameters": [
+          {
+            "name": "days",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 90,
+              "minimum": 1,
+              "default": 7,
+              "title": "Days"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/output/text": {
+      "post": {
+        "tags": [
+          "输出"
+        ],
+        "summary": "Text Output",
+        "description": "文字输出接口",
+        "operationId": "text_output_output_text_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_text_output_output_text_post"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/output/speech": {
+      "post": {
+        "tags": [
+          "输出"
+        ],
+        "summary": "Speech Output",
+        "description": "语音输出接口",
+        "operationId": "speech_output_output_speech_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_speech_output_output_speech_post"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/output/mouse/move": {
+      "post": {
+        "tags": [
+          "输出"
+        ],
+        "summary": "Mouse Move",
+        "description": "移动鼠标到指定位置",
+        "operationId": "mouse_move_output_mouse_move_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MouseMoveRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/output/mouse/click": {
+      "post": {
+        "tags": [
+          "输出"
+        ],
+        "summary": "Mouse Click",
+        "description": "点击鼠标",
+        "operationId": "mouse_click_output_mouse_click_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MouseClickRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/output/mouse/double-click": {
+      "post": {
+        "tags": [
+          "输出"
+        ],
+        "summary": "Mouse Double Click",
+        "description": "双击",
+        "operationId": "mouse_double_click_output_mouse_double_click_post",
+        "parameters": [
+          {
+            "name": "x",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "title": "X"
+            }
+          },
+          {
+            "name": "y",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "title": "Y"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/output/mouse/right-click": {
+      "post": {
+        "tags": [
+          "输出"
+        ],
+        "summary": "Mouse Right Click",
+        "description": "右键点击",
+        "operationId": "mouse_right_click_output_mouse_right_click_post",
+        "parameters": [
+          {
+            "name": "x",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "title": "X"
+            }
+          },
+          {
+            "name": "y",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "title": "Y"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/output/mouse/scroll": {
+      "post": {
+        "tags": [
+          "输出"
+        ],
+        "summary": "Mouse Scroll",
+        "description": "滚动鼠标",
+        "operationId": "mouse_scroll_output_mouse_scroll_post",
+        "parameters": [
+          {
+            "name": "x",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "title": "X"
+            }
+          },
+          {
+            "name": "y",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "title": "Y"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "integer",
+                "title": "Clicks"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/output/mouse/drag": {
+      "post": {
+        "tags": [
+          "输出"
+        ],
+        "summary": "Mouse Drag",
+        "description": "拖拽操作",
+        "operationId": "mouse_drag_output_mouse_drag_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MouseDragRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/output/mouse/position": {
+      "get": {
+        "tags": [
+          "输出"
+        ],
+        "summary": "Get Mouse Position",
+        "description": "获取当前鼠标位置",
+        "operationId": "get_mouse_position_output_mouse_position_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/output/keyboard/press": {
+      "post": {
+        "tags": [
+          "输出"
+        ],
+        "summary": "Keyboard Press",
+        "description": "按下按键",
+        "operationId": "keyboard_press_output_keyboard_press_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/KeyboardPressRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/output/keyboard/type": {
+      "post": {
+        "tags": [
+          "输出"
+        ],
+        "summary": "Keyboard Type",
+        "description": "输入文本",
+        "operationId": "keyboard_type_output_keyboard_type_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/KeyboardTypeRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/output/keyboard/hotkey": {
+      "post": {
+        "tags": [
+          "输出"
+        ],
+        "summary": "Keyboard Hotkey",
+        "description": "组合键",
+        "operationId": "keyboard_hotkey_output_keyboard_hotkey_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/HotkeyRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/output/keyboard/key-down": {
+      "post": {
+        "tags": [
+          "输出"
+        ],
+        "summary": "Keyboard Key Down",
+        "description": "按住按键",
+        "operationId": "keyboard_key_down_output_keyboard_key_down_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_keyboard_key_down_output_keyboard_key_down_post"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/output/keyboard/key-up": {
+      "post": {
+        "tags": [
+          "输出"
+        ],
+        "summary": "Keyboard Key Up",
+        "description": "释放按键",
+        "operationId": "keyboard_key_up_output_keyboard_key_up_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_keyboard_key_up_output_keyboard_key_up_post"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/output/ui/screenshot": {
+      "post": {
+        "tags": [
+          "输出"
+        ],
+        "summary": "Ui Screenshot",
+        "description": "截图",
+        "operationId": "ui_screenshot_output_ui_screenshot_post",
+        "parameters": [
+          {
+            "name": "x",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "title": "X"
+            }
+          },
+          {
+            "name": "y",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "title": "Y"
+            }
+          },
+          {
+            "name": "width",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "title": "Width"
+            }
+          },
+          {
+            "name": "height",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "title": "Height"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/output/ui/detect": {
+      "post": {
+        "tags": [
+          "输出"
+        ],
+        "summary": "Ui Detect Elements",
+        "description": "检测UI元素",
+        "operationId": "ui_detect_elements_output_ui_detect_post",
+        "parameters": [
+          {
+            "name": "element_types",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "description": "逗号分隔: button,input,icon",
+              "title": "Element Types"
+            },
+            "description": "逗号分隔: button,input,icon"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/output/ui/click": {
+      "post": {
+        "tags": [
+          "输出"
+        ],
+        "summary": "Ui Click",
+        "description": "点击UI元素或指定位置",
+        "operationId": "ui_click_output_ui_click_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UIClickRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/output/ui/hover": {
+      "post": {
+        "tags": [
+          "输出"
+        ],
+        "summary": "Ui Hover",
+        "description": "悬停到指定位置",
+        "operationId": "ui_hover_output_ui_hover_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_ui_hover_output_ui_hover_post"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/output/ui/type": {
+      "post": {
+        "tags": [
+          "输出"
+        ],
+        "summary": "Ui Type",
+        "description": "在指定位置输入文本",
+        "operationId": "ui_type_output_ui_type_post",
+        "parameters": [
+          {
+            "name": "x",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "title": "X"
+            }
+          },
+          {
+            "name": "y",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "title": "Y"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "string",
+                "title": "Text"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/output/controller/pause": {
+      "post": {
+        "tags": [
+          "输出"
+        ],
+        "summary": "Pause Controller",
+        "description": "暂停控制器",
+        "operationId": "pause_controller_output_controller_pause_post",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/output/controller/resume": {
+      "post": {
+        "tags": [
+          "输出"
+        ],
+        "summary": "Resume Controller",
+        "description": "恢复控制器",
+        "operationId": "resume_controller_output_controller_resume_post",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/output/controller/mode": {
+      "post": {
+        "tags": [
+          "输出"
+        ],
+        "summary": "Set Controller Mode",
+        "description": "切换控制器类型（已废弃，使用基础设施配置）",
+        "operationId": "set_controller_mode_output_controller_mode_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_set_controller_mode_output_controller_mode_post"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/output/status": {
+      "get": {
+        "tags": [
+          "输出"
+        ],
+        "summary": "Get Status",
+        "description": "获取输出模块状态",
+        "operationId": "get_status_output_status_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/resources/probes/register": {
+      "post": {
+        "tags": [
+          "资源管理"
+        ],
+        "summary": "Register Probe",
+        "description": "注册探针",
+        "operationId": "register_probe_resources_probes_register_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_register_probe_resources_probes_register_post"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/resources/probes/{probe_name}/heartbeat": {
+      "post": {
+        "tags": [
+          "资源管理"
+        ],
+        "summary": "Probe Heartbeat",
+        "description": "探针心跳",
+        "operationId": "probe_heartbeat_resources_probes__probe_name__heartbeat_post",
+        "parameters": [
+          {
+            "name": "probe_name",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Probe Name"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_probe_heartbeat_resources_probes__probe_name__heartbeat_post"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/resources/probes": {
+      "get": {
+        "tags": [
+          "资源管理"
+        ],
+        "summary": "Get All Probes",
+        "description": "获取所有探针状态",
+        "operationId": "get_all_probes_resources_probes_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/resources/probes/{probe_name}": {
+      "get": {
+        "tags": [
+          "资源管理"
+        ],
+        "summary": "Get Probe Status",
+        "description": "获取单个探针状态",
+        "operationId": "get_probe_status_resources_probes__probe_name__get",
+        "parameters": [
+          {
+            "name": "probe_name",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Probe Name"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/resources/probes/health": {
+      "get": {
+        "tags": [
+          "资源管理"
+        ],
+        "summary": "Check Probes Health",
+        "description": "检查探针健康度",
+        "operationId": "check_probes_health_resources_probes_health_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/resources/models/register": {
+      "post": {
+        "tags": [
+          "资源管理"
+        ],
+        "summary": "Register Model",
+        "description": "注册模型",
+        "operationId": "register_model_resources_models_register_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_register_model_resources_models_register_post"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/resources/models/{model_name}/usage": {
+      "post": {
+        "tags": [
+          "资源管理"
+        ],
+        "summary": "Update Model Usage",
+        "description": "更新模型资源使用",
+        "operationId": "update_model_usage_resources_models__model_name__usage_post",
+        "parameters": [
+          {
+            "name": "model_name",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Model Name"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_update_model_usage_resources_models__model_name__usage_post"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/resources/models": {
+      "get": {
+        "tags": [
+          "资源管理"
+        ],
+        "summary": "Get All Models",
+        "description": "获取所有模型资源使用",
+        "operationId": "get_all_models_resources_models_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/resources/models/{model_name}": {
+      "get": {
+        "tags": [
+          "资源管理"
+        ],
+        "summary": "Get Model Usage",
+        "description": "获取单个模型资源使用",
+        "operationId": "get_model_usage_resources_models__model_name__get",
+        "parameters": [
+          {
+            "name": "model_name",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Model Name"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/resources/system/snapshot": {
+      "get": {
+        "tags": [
+          "资源管理"
+        ],
+        "summary": "Get System Snapshot",
+        "description": "获取系统资源快照",
+        "operationId": "get_system_snapshot_resources_system_snapshot_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/resources/system/thresholds": {
+      "get": {
+        "tags": [
+          "资源管理"
+        ],
+        "summary": "Check System Thresholds",
+        "description": "检查系统资源阈值",
+        "operationId": "check_system_thresholds_resources_system_thresholds_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/resources/history": {
+      "get": {
+        "tags": [
+          "资源管理"
+        ],
+        "summary": "Get Resource History",
+        "description": "获取资源历史",
+        "operationId": "get_resource_history_resources_history_get",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 10,
+              "title": "Limit"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/resources/status": {
+      "get": {
+        "tags": [
+          "资源管理"
+        ],
+        "summary": "Get Comprehensive Status",
+        "description": "获取综合资源状态",
+        "operationId": "get_comprehensive_status_resources_status_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/resources/monitoring/start": {
+      "post": {
+        "tags": [
+          "资源管理"
+        ],
+        "summary": "Start Monitoring",
+        "description": "启动后台监控",
+        "operationId": "start_monitoring_resources_monitoring_start_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "number",
+                "title": "Interval",
+                "default": 5.0
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/resources/monitoring/stop": {
+      "post": {
+        "tags": [
+          "资源管理"
+        ],
+        "summary": "Stop Monitoring",
+        "description": "停止后台监控",
+        "operationId": "stop_monitoring_resources_monitoring_stop_post",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/security/status": {
+      "get": {
+        "tags": [
+          "安全系统"
+        ],
+        "summary": "Get Security Status",
+        "description": "获取安全系统状态",
+        "operationId": "get_security_status_security_status_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/security/audit": {
+      "get": {
+        "tags": [
+          "安全系统"
+        ],
+        "summary": "Get Audit Logs",
+        "description": "获取审计日志",
+        "operationId": "get_audit_logs_security_audit_get",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 50,
+              "title": "Limit"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/security/switch": {
+      "post": {
+        "tags": [
+          "安全系统"
+        ],
+        "summary": "Set Security Switch",
+        "description": "设置安全开关",
+        "operationId": "set_security_switch_security_switch_post",
+        "parameters": [
+          {
+            "name": "level",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Level"
+            }
+          },
+          {
+            "name": "enable",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "boolean",
+              "title": "Enable"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/security/validate/input": {
+      "post": {
+        "tags": [
+          "安全系统"
+        ],
+        "summary": "Validate Input",
+        "description": "校验输入",
+        "operationId": "validate_input_security_validate_input_post",
+        "parameters": [
+          {
+            "name": "content",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Content"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/security/validate/output": {
+      "post": {
+        "tags": [
+          "安全系统"
+        ],
+        "summary": "Validate Output",
+        "description": "校验输出",
+        "operationId": "validate_output_security_validate_output_post",
+        "parameters": [
+          {
+            "name": "content",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Content"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/security/validate/module": {
+      "post": {
+        "tags": [
+          "安全系统"
+        ],
+        "summary": "Validate Module Call",
+        "description": "校验模块调用",
+        "operationId": "validate_module_call_security_validate_module_post",
+        "parameters": [
+          {
+            "name": "caller",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Caller"
+            }
+          },
+          {
+            "name": "target",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Target"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/": {
+      "get": {
+        "summary": "Root",
+        "description": "根路径",
+        "operationId": "root__get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/health": {
+      "get": {
+        "summary": "Health Check",
+        "description": "健康检查",
+        "operationId": "health_check_health_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Body_analyze_attention_attention_analyze_post": {
+        "properties": {
+          "user_input": {
+            "type": "string",
+            "title": "User Input"
+          },
+          "context": {
+            "anyOf": [
+              {
+                "items": {
+                  "additionalProperties": true,
+                  "type": "object"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Context"
+          },
+          "short_term_memory": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Short Term Memory"
+          }
+        },
+        "type": "object",
+        "required": [
+          "user_input"
+        ],
+        "title": "Body_analyze_attention_attention_analyze_post"
+      },
+      "Body_analyze_image_base64_image_analyze_base64_post": {
+        "properties": {
+          "image": {
+            "type": "string",
+            "title": "Image"
+          },
+          "prompt": {
+            "type": "string",
+            "title": "Prompt",
+            "default": "详细描述这张图片"
+          }
+        },
+        "type": "object",
+        "required": [
+          "image"
+        ],
+        "title": "Body_analyze_image_base64_image_analyze_base64_post"
+      },
+      "Body_analyze_image_image_analyze_post": {
+        "properties": {
+          "image_file": {
+            "type": "string",
+            "contentMediaType": "application/octet-stream",
+            "title": "Image File"
+          },
+          "prompt": {
+            "type": "string",
+            "title": "Prompt",
+            "default": "详细描述这张图片，包含所有可见的物体、场景和细节"
+          }
+        },
+        "type": "object",
+        "required": [
+          "image_file"
+        ],
+        "title": "Body_analyze_image_image_analyze_post"
+      },
+      "Body_analyze_image_url_image_analyze_url_post": {
+        "properties": {
+          "image_url": {
+            "type": "string",
+            "title": "Image Url"
+          },
+          "prompt": {
+            "type": "string",
+            "title": "Prompt",
+            "default": "详细描述这张图片"
+          }
+        },
+        "type": "object",
+        "required": [
+          "image_url"
+        ],
+        "title": "Body_analyze_image_url_image_analyze_url_post"
+      },
+      "Body_analyze_with_query_image_analyze_query_post": {
+        "properties": {
+          "image_file": {
+            "type": "string",
+            "contentMediaType": "application/octet-stream",
+            "title": "Image File"
+          },
+          "query": {
+            "type": "string",
+            "title": "Query",
+            "default": "详细描述这张图片，包含所有UI元素的位置和颜色"
+          }
+        },
+        "type": "object",
+        "required": [
+          "image_file"
+        ],
+        "title": "Body_analyze_with_query_image_analyze_query_post"
+      },
+      "Body_calculate_weight_attention_weight_calculate_post": {
+        "properties": {
+          "base_weight": {
+            "type": "number",
+            "title": "Base Weight",
+            "default": 0.5
+          },
+          "sound_level": {
+            "type": "number",
+            "title": "Sound Level",
+            "default": 0.0
+          },
+          "visual_level": {
+            "type": "number",
+            "title": "Visual Level",
+            "default": 0.0
+          },
+          "task_priority": {
+            "type": "number",
+            "title": "Task Priority",
+            "default": 0.5
+          },
+          "emotion_intensity": {
+            "type": "number",
+            "title": "Emotion Intensity",
+            "default": 0.0
+          }
+        },
+        "type": "object",
+        "title": "Body_calculate_weight_attention_weight_calculate_post"
+      },
+      "Body_call_tool_sync_tools_call_sync_post": {
+        "properties": {
+          "tool_name": {
+            "type": "string",
+            "title": "Tool Name",
+            "description": "工具名称"
+          },
+          "params": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Params",
+            "description": "工具参数",
+            "default": {}
+          }
+        },
+        "type": "object",
+        "required": [
+          "tool_name"
+        ],
+        "title": "Body_call_tool_sync_tools_call_sync_post"
+      },
+      "Body_call_tool_tools_call_post": {
+        "properties": {
+          "tool_name": {
+            "type": "string",
+            "title": "Tool Name",
+            "description": "工具名称"
+          },
+          "params": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Params",
+            "description": "工具参数",
+            "default": {}
+          }
+        },
+        "type": "object",
+        "required": [
+          "tool_name"
+        ],
+        "title": "Body_call_tool_tools_call_post"
+      },
+      "Body_detect_ui_elements_image_detect_ui_post": {
+        "properties": {
+          "image_file": {
+            "type": "string",
+            "contentMediaType": "application/octet-stream",
+            "title": "Image File"
+          },
+          "element_types": {
+            "type": "string",
+            "title": "Element Types"
+          }
+        },
+        "type": "object",
+        "required": [
+          "image_file"
+        ],
+        "title": "Body_detect_ui_elements_image_detect_ui_post"
+      },
+      "Body_draw_ui_elements_image_draw_elements_post": {
+        "properties": {
+          "image_file": {
+            "type": "string",
+            "contentMediaType": "application/octet-stream",
+            "title": "Image File"
+          },
+          "element_data": {
+            "type": "string",
+            "title": "Element Data"
+          }
+        },
+        "type": "object",
+        "required": [
+          "image_file",
+          "element_data"
+        ],
+        "title": "Body_draw_ui_elements_image_draw_elements_post"
+      },
+      "Body_keyboard_key_down_output_keyboard_key_down_post": {
+        "properties": {
+          "key": {
+            "type": "string",
+            "title": "Key"
+          }
+        },
+        "type": "object",
+        "required": [
+          "key"
+        ],
+        "title": "Body_keyboard_key_down_output_keyboard_key_down_post"
+      },
+      "Body_keyboard_key_up_output_keyboard_key_up_post": {
+        "properties": {
+          "key": {
+            "type": "string",
+            "title": "Key"
+          }
+        },
+        "type": "object",
+        "required": [
+          "key"
+        ],
+        "title": "Body_keyboard_key_up_output_keyboard_key_up_post"
+      },
+      "Body_probe_heartbeat_resources_probes__probe_name__heartbeat_post": {
+        "properties": {
+          "latency_ms": {
+            "type": "number",
+            "title": "Latency Ms",
+            "default": 0.0
+          },
+          "success": {
+            "type": "boolean",
+            "title": "Success",
+            "default": true
+          },
+          "metadata": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Metadata",
+            "default": {}
+          }
+        },
+        "type": "object",
+        "title": "Body_probe_heartbeat_resources_probes__probe_name__heartbeat_post"
+      },
+      "Body_recall_memories_attention_memory_recall_post": {
+        "properties": {
+          "query": {
+            "type": "string",
+            "title": "Query"
+          },
+          "attention_level": {
+            "type": "number",
+            "title": "Attention Level",
+            "default": 0.6
+          }
+        },
+        "type": "object",
+        "required": [
+          "query"
+        ],
+        "title": "Body_recall_memories_attention_memory_recall_post"
+      },
+      "Body_recognize_speech_base64_speech_recognize_base64_post": {
+        "properties": {
+          "audio": {
+            "type": "string",
+            "title": "Audio"
+          },
+          "language": {
+            "type": "string",
+            "title": "Language",
+            "default": "auto"
+          }
+        },
+        "type": "object",
+        "required": [
+          "audio"
+        ],
+        "title": "Body_recognize_speech_base64_speech_recognize_base64_post"
+      },
+      "Body_recognize_speech_speech_recognize_post": {
+        "properties": {
+          "audio_file": {
+            "type": "string",
+            "contentMediaType": "application/octet-stream",
+            "title": "Audio File"
+          },
+          "language": {
+            "type": "string",
+            "title": "Language",
+            "default": "auto"
+          },
+          "task": {
+            "type": "string",
+            "title": "Task",
+            "default": "transcribe"
+          }
+        },
+        "type": "object",
+        "required": [
+          "audio_file"
+        ],
+        "title": "Body_recognize_speech_speech_recognize_post"
+      },
+      "Body_register_model_resources_models_register_post": {
+        "properties": {
+          "model_name": {
+            "type": "string",
+            "title": "Model Name"
+          },
+          "model_type": {
+            "type": "string",
+            "title": "Model Type",
+            "default": "expert"
+          },
+          "memory_mb": {
+            "type": "number",
+            "title": "Memory Mb",
+            "default": 0.0
+          }
+        },
+        "type": "object",
+        "required": [
+          "model_name"
+        ],
+        "title": "Body_register_model_resources_models_register_post"
+      },
+      "Body_register_probe_resources_probes_register_post": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "metadata": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Metadata",
+            "default": {}
+          }
+        },
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "title": "Body_register_probe_resources_probes_register_post"
+      },
+      "Body_register_tool_tools_register_post": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "description": {
+            "type": "string",
+            "title": "Description",
+            "default": ""
+          },
+          "params": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "type": "object",
+            "title": "Params",
+            "default": {}
+          }
+        },
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "title": "Body_register_tool_tools_register_post"
+      },
+      "Body_save_long_term_memory_long_term_post": {
+        "properties": {
+          "memory_type": {
+            "type": "string",
+            "title": "Memory Type"
+          },
+          "content": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Content"
+          }
+        },
+        "type": "object",
+        "required": [
+          "memory_type",
+          "content"
+        ],
+        "title": "Body_save_long_term_memory_long_term_post"
+      },
+      "Body_save_snapshot_memory_snapshot_post": {
+        "properties": {
+          "snapshot_name": {
+            "type": "string",
+            "title": "Snapshot Name"
+          }
+        },
+        "type": "object",
+        "required": [
+          "snapshot_name"
+        ],
+        "title": "Body_save_snapshot_memory_snapshot_post"
+      },
+      "Body_score_memories_attention_memory_score_post": {
+        "properties": {
+          "query": {
+            "type": "string",
+            "title": "Query"
+          },
+          "memories": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "type": "array",
+            "title": "Memories"
+          },
+          "attention_level": {
+            "type": "number",
+            "title": "Attention Level",
+            "default": 0.6
+          }
+        },
+        "type": "object",
+        "required": [
+          "query",
+          "memories"
+        ],
+        "title": "Body_score_memories_attention_memory_score_post"
+      },
+      "Body_set_controller_mode_output_controller_mode_post": {
+        "properties": {
+          "mode": {
+            "type": "string",
+            "title": "Mode"
+          }
+        },
+        "type": "object",
+        "required": [
+          "mode"
+        ],
+        "title": "Body_set_controller_mode_output_controller_mode_post"
+      },
+      "Body_speech_output_output_speech_post": {
+        "properties": {
+          "text": {
+            "type": "string",
+            "title": "Text"
+          }
+        },
+        "type": "object",
+        "required": [
+          "text"
+        ],
+        "title": "Body_speech_output_output_speech_post"
+      },
+      "Body_text_output_output_text_post": {
+        "properties": {
+          "text": {
+            "type": "string",
+            "title": "Text"
+          }
+        },
+        "type": "object",
+        "required": [
+          "text"
+        ],
+        "title": "Body_text_output_output_text_post"
+      },
+      "Body_ui_hover_output_ui_hover_post": {
+        "properties": {
+          "x": {
+            "type": "integer",
+            "title": "X"
+          },
+          "y": {
+            "type": "integer",
+            "title": "Y"
+          }
+        },
+        "type": "object",
+        "required": [
+          "x",
+          "y"
+        ],
+        "title": "Body_ui_hover_output_ui_hover_post"
+      },
+      "Body_update_model_usage_resources_models__model_name__usage_post": {
+        "properties": {
+          "memory_mb": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Memory Mb"
+          },
+          "cpu_percent": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Cpu Percent"
+          },
+          "inference_time_ms": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Inference Time Ms"
+          },
+          "status": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Status"
+          }
+        },
+        "type": "object",
+        "title": "Body_update_model_usage_resources_models__model_name__usage_post"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "HotkeyRequest": {
+        "properties": {
+          "keys": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Keys"
+          }
+        },
+        "type": "object",
+        "required": [
+          "keys"
+        ],
+        "title": "HotkeyRequest"
+      },
+      "KeyboardPressRequest": {
+        "properties": {
+          "key": {
+            "type": "string",
+            "title": "Key"
+          }
+        },
+        "type": "object",
+        "required": [
+          "key"
+        ],
+        "title": "KeyboardPressRequest"
+      },
+      "KeyboardTypeRequest": {
+        "properties": {
+          "text": {
+            "type": "string",
+            "title": "Text"
+          },
+          "interval": {
+            "type": "number",
+            "title": "Interval",
+            "default": 0.05
+          }
+        },
+        "type": "object",
+        "required": [
+          "text"
+        ],
+        "title": "KeyboardTypeRequest"
+      },
+      "MouseClickRequest": {
+        "properties": {
+          "x": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "X"
+          },
+          "y": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Y"
+          },
+          "button": {
+            "type": "string",
+            "title": "Button",
+            "default": "left"
+          },
+          "clicks": {
+            "type": "integer",
+            "title": "Clicks",
+            "default": 1
+          }
+        },
+        "type": "object",
+        "title": "MouseClickRequest"
+      },
+      "MouseDragRequest": {
+        "properties": {
+          "start_x": {
+            "type": "integer",
+            "title": "Start X"
+          },
+          "start_y": {
+            "type": "integer",
+            "title": "Start Y"
+          },
+          "end_x": {
+            "type": "integer",
+            "title": "End X"
+          },
+          "end_y": {
+            "type": "integer",
+            "title": "End Y"
+          },
+          "duration": {
+            "type": "number",
+            "title": "Duration",
+            "default": 0.5
+          }
+        },
+        "type": "object",
+        "required": [
+          "start_x",
+          "start_y",
+          "end_x",
+          "end_y"
+        ],
+        "title": "MouseDragRequest"
+      },
+      "MouseMoveRequest": {
+        "properties": {
+          "x": {
+            "type": "integer",
+            "title": "X"
+          },
+          "y": {
+            "type": "integer",
+            "title": "Y"
+          },
+          "duration": {
+            "type": "number",
+            "title": "Duration",
+            "default": 0.3
+          }
+        },
+        "type": "object",
+        "required": [
+          "x",
+          "y"
+        ],
+        "title": "MouseMoveRequest"
+      },
+      "UIClickRequest": {
+        "properties": {
+          "x": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "X"
+          },
+          "y": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Y"
+          },
+          "element_type": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Element Type"
+          },
+          "element_text": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Element Text"
+          },
+          "random_offset": {
+            "type": "boolean",
+            "title": "Random Offset",
+            "default": true
+          },
+          "offset_range": {
+            "type": "integer",
+            "title": "Offset Range",
+            "default": 5
+          }
+        },
+        "type": "object",
+        "title": "UIClickRequest"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          },
+          "input": {
+            "title": "Input"
+          },
+          "ctx": {
+            "type": "object",
+            "title": "Context"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError"
+      }
+    }
+  }
+}

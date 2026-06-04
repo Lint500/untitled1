@@ -1,6 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import { pluginService, Plugin } from '@services/pluginService';
+import { useEffect, useState } from 'react';
+import { pluginService } from '../../services/pluginService';
 import styles from './PluginManager.module.css';
+
+interface Plugin {
+  id: string;
+  name: string;
+  version: string;
+  status: 'active' | 'inactive';
+  description: string;
+}
 
 const PluginManager: React.FC = () => {
   const [plugins, setPlugins] = useState<Plugin[]>([]);
@@ -12,37 +20,12 @@ const PluginManager: React.FC = () => {
 
   const loadPlugins = async () => {
     try {
-      setLoading(true);
-      const data = await pluginService.getAllPlugins();
+      const data = await pluginService.getPlugins();
       setPlugins(data);
     } catch (error) {
-      console.error('Failed to load plugins:', error);
+      console.error('加载插件失败:', error);
     } finally {
       setLoading(false);
-    }
-  };
-
-  const handleTogglePlugin = async (pluginId: string, enabled: boolean) => {
-    try {
-      if (enabled) {
-        await pluginService.enablePlugin(pluginId);
-      } else {
-        await pluginService.disablePlugin(pluginId);
-      }
-      await loadPlugins();
-    } catch (error) {
-      console.error('Failed to toggle plugin:', error);
-    }
-  };
-
-  const handleUninstallPlugin = async (pluginId: string) => {
-    if (!confirm('确定要卸载这个插件吗？')) return;
-
-    try {
-      await pluginService.uninstallPlugin(pluginId);
-      await loadPlugins();
-    } catch (error) {
-      console.error('Failed to uninstall plugin:', error);
     }
   };
 
@@ -52,37 +35,21 @@ const PluginManager: React.FC = () => {
 
   return (
     <div className={styles.pluginManager}>
-      <h2 className={styles.listTitle}>插件管理</h2>
-      
+      <h2 className={styles.title}>插件管理</h2>
       <div className={styles.pluginList}>
         {plugins.map((plugin) => (
-          <div
-            key={plugin.id}
-            className={`${styles.pluginCard} ${plugin.enabled ? styles.enabled : ''}`}
-          >
+          <div key={plugin.id} className={styles.pluginCard}>
             <div className={styles.pluginHeader}>
               <div className={styles.pluginInfo}>
                 <h3 className={styles.pluginName}>{plugin.name}</h3>
-                <p className={styles.pluginDescription}>
-                  {plugin.description}
-                </p>
-                <p className={styles.pluginMeta}>
-                  版本：{plugin.version} | 作者：{plugin.author}
-                </p>
+                <p className={styles.pluginDescription}>{plugin.description}</p>
+                <p className={styles.pluginMeta}>版本：{plugin.version}</p>
               </div>
               <div className={styles.pluginActions}>
-                <button
-                  className={`${styles.toggleButton} ${plugin.enabled ? styles.disable : styles.enable}`}
-                  onClick={() => handleTogglePlugin(plugin.id, !plugin.enabled)}
-                >
-                  {plugin.enabled ? '禁用' : '启用'}
+                <button className={`${styles.toggleButton} ${plugin.status === 'active' ? styles.disable : styles.enable}`}>
+                  {plugin.status === 'active' ? '禁用' : '启用'}
                 </button>
-                <button
-                  className={styles.uninstallButton}
-                  onClick={() => handleUninstallPlugin(plugin.id)}
-                >
-                  卸载
-                </button>
+                <button className={styles.uninstallButton}>删除</button>
               </div>
             </div>
           </div>
